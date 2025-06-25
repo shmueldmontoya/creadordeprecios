@@ -1,8 +1,6 @@
-const botonActualizar = document.getElementById('botonActualizarRotulo');
 const botonDescargar = document.getElementById('botonDescargarRotulo');
 
 // Event listeners para los botones e input fields
-botonActualizar.addEventListener('click', actualizarRotulo);
 botonDescargar.addEventListener('click', descargarImagen);
 document.getElementById('producto').addEventListener('input', actualizarRotulo);
 document.getElementById('actual').addEventListener('input', actualizarRotulo);
@@ -23,7 +21,7 @@ function actualizarRotulo() {
 function descargarImagen() {
   html2canvas(document.getElementById('rotulo')).then(canvas => {
     const enlace = document.createElement('a');
-    enlace.download = 'rotulo.png';
+    enlace.download = document.getElementById('producto').value + '-rotulo.png';
     enlace.href = canvas.toDataURL();
     enlace.click();
   });
@@ -48,4 +46,40 @@ document.getElementById('codigo').addEventListener('input', function () {
     document.getElementById('producto').value = productoEncontrado.nombre;
     actualizarRotulo();
   }
+});
+
+// Añadir clase 'no-vacio' a los inputs que no están vacíos
+// Esto fue para solucionar el problema de que los input fields requerían el atributo 'required' para que no se rompieran los estilos
+document.querySelectorAll('.campo-input input').forEach(input => {
+  const actualizarClase = () => {
+    if (input.value.trim() !== '') {
+      input.classList.add('no-vacio');
+    } else {
+      input.classList.remove('no-vacio');
+    }
+  };
+
+  input.addEventListener('input', actualizarClase);
+  actualizarClase();
+});
+
+// Esto es para añadir el efecto de ripple a los botones
+document.querySelectorAll('.ripple').forEach(boton => {
+  boton.addEventListener('click', function (e) {
+    const ripple = document.createElement('span');
+    ripple.classList.add('ripple');
+
+    const rect = this.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+    ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+
+    this.appendChild(ripple);
+
+    // Eliminar el ripple después de la animación
+    ripple.addEventListener('animationend', () => {
+      ripple.remove();
+    });
+  });
 });

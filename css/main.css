@@ -142,7 +142,7 @@ label {
     opacity: 0;
   }
 }
-.previsualizacion {
+/*.previsualizacion {
   transform: scale(50%);
   transform-origin: top left;
   display: inline-block;
@@ -151,7 +151,7 @@ label {
   overflow: hidden;
   align-self: center;
   margin-left: 500px;
-}
+}*/ /* Previsualización del rotulo, se comento porque no se descarga bien el archivo */
 
 /* Estilos de animacion para los input fields */
 .campo-input {

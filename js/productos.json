@@ -4,8 +4,24 @@
     "nombre": "Ala entera"
   },
   {
+    "codigos": ["122"],
+    "nombre": "Chile Unidad"
+  },
+  {
+    "codigos": ["654"],
+    "nombre": "Chile pequeño"
+  },
+  {
     "codigos": ["129"],
     "nombre": "Ajos malla de 3 unidades"
+  },
+  {
+    "codigos": ["131"],
+    "nombre": "Zapayo/Zucchini unidad"
+  },
+  {
+    "codigos": ["117"],
+    "nombre": "Plátano unidad"
   },
   {
     "codigos": ["676"],

@@ -1,0 +1,73 @@
+@font-face {
+  font-family: 'Mosk';
+  src: url('../recursos/fuentes/Mosk\ Normal\ 400.ttf') format('truetype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'Mosk';
+  src: url('../recursos/fuentes/Mosk\ Bold\ 700.ttf') format('truetype');
+  font-weight: bold;
+}
+body {
+  font-family: sans-serif;
+  padding: 2rem;
+  background: #f5f5f5;
+}
+.formulario {
+  margin-bottom: 2rem;
+}
+label {
+  display: block;
+  margin-top: 1rem;
+}
+.rotulo {
+  width: 994px;
+  height: 768px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  font-family: sans-serif;
+}
+.precio-actual {
+  position: absolute;
+  top: 400px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'Mosk', sans-serif;
+  font-weight: bold;
+  font-size: 150px;
+  color: red;
+}
+.producto {
+  position: absolute;
+  top: 100px;
+  left: 40px;
+  right: 40px;
+  text-align: center;
+  font-family: 'Mosk', sans-serif;
+  font-weight: bold;
+  font-size: 80px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  word-wrap: break-word;
+  white-space: normal;
+}
+.antes {
+  position: absolute;
+  bottom: 30px;
+  left: 220px;
+  font-family: 'Mosk', sans-serif;
+  font-weight: bold;
+  font-size: 70px;
+  color: red;
+}
+.ahorre {
+  position: absolute;
+  bottom: 30px;
+  right: 110px;
+  font-family: 'Mosk', sans-serif;
+  font-weight: bold;
+  font-size: 70px;
+  color: red;
+}

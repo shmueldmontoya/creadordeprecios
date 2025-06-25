@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Generador de Rótulos</title>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/fondo.css">
+  <script defer src="js/main.js"></script>
+</head>
+<body>
+  <div class="formulario">
+    <label>Codigo: <input type="number" id="codigo" value=""></label>
+    <label>Producto: <input type="text" id="producto" value=""></label>
+    <label>Precio actual: <input type="number" id="actual" value=""></label>
+    <label>Precio anterior: <input type="number" id="anterior" value=""></label>
+    <button id="botonActualizarRotulo">Actualizar</button>
+    <button id="botonDescargarRotulo">Descargar imagen</button>
+  </div>
+
+  <div class="rotulo" id="rotulo">
+    <div class="producto" id="texto-producto"></div>
+    <div class="precio-actual" id="texto-actual"></div>
+    <div class="antes" id="texto-anterior"></div>
+    <div class="ahorre" id="texto-ahorre"></div>
+  </div>
+</body>
+</html>

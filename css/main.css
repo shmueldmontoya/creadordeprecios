@@ -41,7 +41,7 @@ body {
   margin: 0;
   font-family: sans-serif;
   background: #fafafa;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 .formulario {
   background-color: #ffffff;
@@ -141,6 +141,9 @@ label {
     transform: scale(4);
     opacity: 0;
   }
+}
+.previsualizacion {
+  margin: -99999999px;
 }
 /*.previsualizacion {
   transform: scale(50%);

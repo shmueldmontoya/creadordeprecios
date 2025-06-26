@@ -30,7 +30,8 @@
   {
     "codigos": ["676"],
     "nombre": "Trozos de pollo en salsa criolla"
-  },{
+  },
+  {
     "codigos": ["532"],
     "nombre": "Trozos de pollo en salsa bbq"
   },
@@ -121,5 +122,5 @@
   {
     "codigos": ["127"],
     "nombre": "Pera Unidad"
-  },
+  }
 ]

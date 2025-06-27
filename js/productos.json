@@ -4,6 +4,14 @@
     "nombre": "Ala entera"
   },
   {
+    "codigos": ["430"],
+    "nombre": "Mortadela con Chile dulce kimby"
+  },
+  {
+    "codigos": ["770"],
+    "nombre": "Mortadela especial kimby"
+  },
+  {
     "codigos": ["122"],
     "nombre": "Chile Unidad"
   },

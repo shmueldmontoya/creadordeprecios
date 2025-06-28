@@ -4,8 +4,36 @@
     "nombre": "Ala entera"
   },
   {
+    "codigos": ["430"],
+    "nombre": "Mortadela con Chile dulce kimby"
+  },
+  {
+    "codigos": ["770"],
+    "nombre": "Mortadela especial kimby"
+  },
+  {
+    "codigos": ["122"],
+    "nombre": "Chile Unidad"
+  },
+  {
+    "codigos": ["152"],
+    "nombre": "Lechuga Hidropónica unidad"
+  },
+  {
+    "codigos": ["654"],
+    "nombre": "Chile pequeño"
+  },
+  {
     "codigos": ["129"],
     "nombre": "Ajos malla de 3 unidades"
+  },
+  {
+    "codigos": ["131"],
+    "nombre": "Zapayo/Zucchini unidad"
+  },
+  {
+    "codigos": ["117"],
+    "nombre": "Plátano unidad"
   },
   {
     "codigos": ["676"],
@@ -73,7 +101,7 @@
   },
   {
     "codigos": ["596"],
-    "nombre": "Bistec de res areglado al churrasco"
+    "nombre": "Bistec de res arreglado al churrasco"
   },
   {
     "codigos": ["605"],
@@ -98,5 +126,9 @@
   {
     "codigos": ["753"],
     "nombre": "Trocitos de pechuga"
+  },
+  {
+    "codigos": ["127"],
+    "nombre": "Pera Unidad"
   }
 ]

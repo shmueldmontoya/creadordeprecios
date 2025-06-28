@@ -46,16 +46,27 @@
 
 <div class="campo-radio">
   <span>Unidad de medida:</span>
-  <label><input type="radio" name="tipoVenta" value="kg" /> Kilogramo</label>
-  <label><input type="radio" name="tipoVenta" value="ud" /> Unidad</label>
-  <label><input type="radio" name="tipoVenta" value="" checked /> No indicar</label>
+  <label><input id="inputkg" type="radio" name="tipoVenta" value="kg" /> Kilogramo</label>
+  <label><input id="inputud" type="radio" name="tipoVenta" value="ud" /> Unidad</label>
+  <label><input id="inputempty" type="radio" name="tipoVenta" value="" checked /> No indicar</label>
 </div>
 
+<div class="campo-fondo">
+  <span class="etiqueta-fondo">Diseño de fondo:</span>
+  <select id="selectorFondo" class="selector-fondo">
+    <option value="fondo">Martes de Feria</option>
+    <option value="fondo2">Viernes de tu marca</option>
+    <option value="fondo3">Diseño Genérico</option>
+  </select>
+</div>
 
-    <div class="botones-formulario">
-      <button id="botonDescargarRotulo" class="botonDescargarRotulo ripple">Descargar imagen</button>
-    </div>
-  </div>
+<div class="botones-formulario">
+  <button id="botonDescargarRotulo" class="botonDescargarRotulo ripple">Descargar imagen</button>
+</div>
+
+<div id="mensajeError" class="mensaje-error" style="display: none;"><i class="fa-solid fa-circle-exclamation"></i></div>
+
+</div>
 
   <div class="previsualizacion">
     <div class="rotulo" id="rotulo">
@@ -65,5 +76,6 @@
       <div class="ahorre" id="texto-ahorre"></div>
     </div>
   </div>
+
 </body>
 </html>

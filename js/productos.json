@@ -1397,5 +1397,41 @@
       "110"
     ],
     "nombre": "Ñampi Granel"
+  },
+  {
+    "codigos": [
+      "733"
+    ],
+    "nombre": "Posta de paleta de cerdo"
+  },
+  {
+    "codigos":[
+      "753"
+    ],
+    "nombre": "Trozos de pechuga con hueso"
+  },
+  {
+    "codigos":[
+      "668"
+    ],
+    "nombre": "Carne molida de res premium"
+  },
+  {
+    "codigos":[
+      "720"
+    ],
+    "nombre": "Filet de tilapia granel"
+  },
+  {
+    "codigos":[
+      "184"
+    ],
+    "nombre": "Filet de pollo marinado"
+  },
+  {
+    "codigos":[
+      "472"
+    ],
+    "nombre": "Papa prefrita pipasa granel"
   }
 ]

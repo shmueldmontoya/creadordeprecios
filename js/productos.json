@@ -1,134 +1,1401 @@
 [
   {
-    "codigos": ["166", "551", "366", "531"],
-    "nombre": "Ala entera"
+    "codigos": [
+      "731"
+    ],
+    "nombre": "Aguacate Pequeño Granel"
   },
   {
-    "codigos": ["430"],
-    "nombre": "Mortadela con Chile dulce kimby"
+    "codigos": [
+      "129"
+    ],
+    "nombre": "Ajo Malla 3uds"
   },
   {
-    "codigos": ["770"],
-    "nombre": "Mortadela especial kimby"
+    "codigos": [
+      "465"
+    ],
+    "nombre": "Ajo Malla 500g"
   },
   {
-    "codigos": ["122"],
+    "codigos": [
+      "8487"
+    ],
+    "nombre": "Ajo Trenza 1kg"
+  },
+  {
+    "codigos": [
+      "551"
+    ],
+    "nombre": "Ala Entera DC"
+  },
+  {
+    "codigos": [
+      "166"
+    ],
+    "nombre": "Ala Entera Ecopollo"
+  },
+  {
+    "codigos": [
+      "366"
+    ],
+    "nombre": "Ala Entera Pipasa"
+  },
+  {
+    "codigos": [
+      "531"
+    ],
+    "nombre": "Ala Entera Tres Jotas"
+  },
+  {
+    "codigos": [
+      "142"
+    ],
+    "nombre": "Apio Granel"
+  },
+  {
+    "codigos": [
+      "257"
+    ],
+    "nombre": "Ayote Mantequilla Granel"
+  },
+  {
+    "codigos": [
+      "138"
+    ],
+    "nombre": "Ayote Sazón Granel"
+  },
+  {
+    "codigos": [
+      "135"
+    ],
+    "nombre": "Ayote Tierno Unidad"
+  },
+  {
+    "codigos": [
+      "120"
+    ],
+    "nombre": "Banano Unidad"
+  },
+  {
+    "codigos": [
+      "239"
+    ],
+    "nombre": "Berenjena Unidad"
+  },
+  {
+    "codigos": [
+      "594"
+    ],
+    "nombre": "Bistec Cerdo BBQ Montecillos"
+  },
+  {
+    "codigos": [
+      "261"
+    ],
+    "nombre": "Bistec Cerdo Tres Jotas"
+  },
+  {
+    "codigos": [
+      "19"
+    ],
+    "nombre": "Bistec de Res Adobado Tres Jotas"
+  },
+  {
+    "codigos": [
+      "641"
+    ],
+    "nombre": "Bistec de Res Almacén"
+  },
+  {
+    "codigos": [
+      "596"
+    ],
+    "nombre": "Bistec de res arregaldo al Churrasco"
+  },
+  {
+    "codigos": [
+      "105"
+    ],
+    "nombre": "Brócoli Granel"
+  },
+  {
+    "codigos": [
+      "102"
+    ],
+    "nombre": "Camote Granel"
+  },
+  {
+    "codigos": [
+      "207"
+    ],
+    "nombre": "Carambola Granel"
+  },
+  {
+    "codigos": [
+      "303"
+    ],
+    "nombre": "Carne de res para mechar Tres Jotas"
+  },
+  {
+    "codigos": [
+      "691"
+    ],
+    "nombre": "Carnitas DC"
+  },
+  {
+    "codigos": [
+      "208"
+    ],
+    "nombre": "Cas Granel"
+  },
+  {
+    "codigos": [
+      "96"
+    ],
+    "nombre": "Cebolla Amarilla Granel"
+  },
+  {
+    "codigos": [
+      "155"
+    ],
+    "nombre": "Cebolla Mini Malla Granel"
+  },
+  {
+    "codigos": [
+      "104"
+    ],
+    "nombre": "Cebolla Morada Granel"
+  },
+  {
+    "codigos": [
+      "673"
+    ],
+    "nombre": "Cebolla Pequeña Granel"
+  },
+  {
+    "codigos": [
+      "137"
+    ],
+    "nombre": "Cebollino Rollo Unidad"
+  },
+  {
+    "codigos": [
+      "176"
+    ],
+    "nombre": "Cecina de Res Almacén"
+  },
+  {
+    "codigos": [
+      "333"
+    ],
+    "nombre": "Chayote Blanco Unidad"
+  },
+  {
+    "codigos": [
+      "157"
+    ],
+    "nombre": "Chayote Cocoro Bolsa Unidad"
+  },
+  {
+    "codigos": [
+      "141"
+    ],
+    "nombre": "Chayote Negro Unidad"
+  },
+  {
+    "codigos": [
+      "149"
+    ],
+    "nombre": "Chayote Quelite 3uds"
+  },
+  {
+    "codigos": [
+      "524"
+    ],
+    "nombre": "Chayote Quelite Unidad"
+  },
+  {
+    "codigos": [
+      "291"
+    ],
+    "nombre": "Chile Jalapeño Bandeja Unidad"
+  },
+  {
+    "codigos": [
+      "276"
+    ],
+    "nombre": "Chile Panameño Bandeja Unidad"
+  },
+  {
+    "codigos": [
+      "654"
+    ],
+    "nombre": "Chile Pequeño Unidad"
+  },
+  {
+    "codigos": [
+      "154"
+    ],
+    "nombre": "Chile Promo Malla Unidad"
+  },
+  {
+    "codigos": [
+      "122"
+    ],
     "nombre": "Chile Unidad"
   },
   {
-    "codigos": ["152"],
-    "nombre": "Lechuga Hidropónica unidad"
+    "codigos": [
+      "664"
+    ],
+    "nombre": "Chorizo"
   },
   {
-    "codigos": ["654"],
-    "nombre": "Chile pequeño"
+    "codigos": [
+      "1"
+    ],
+    "nombre": "Chorizo Criollo"
   },
   {
-    "codigos": ["129"],
-    "nombre": "Ajos malla de 3 unidades"
+    "codigos": [
+      "632"
+    ],
+    "nombre": "Chorizo Criollo "
   },
   {
-    "codigos": ["131"],
-    "nombre": "Zapayo/Zucchini unidad"
+    "codigos": [
+      "3"
+    ],
+    "nombre": "Chuleta Ahumada Tres Jotas"
   },
   {
-    "codigos": ["117"],
-    "nombre": "Plátano unidad"
+    "codigos": [
+      "657"
+    ],
+    "nombre": "Chuleta Montecillos(Almacén)"
   },
   {
-    "codigos": ["676"],
-    "nombre": "Trozos de pollo en salsa criolla"
+    "codigos": [
+      "116"
+    ],
+    "nombre": "Ciruela Importada Granel"
   },
   {
-    "codigos": ["532"],
-    "nombre": "Trozos de pollo en salsa bbq"
+    "codigos": [
+      "134"
+    ],
+    "nombre": "Coco Unidad"
   },
   {
-    "codigos": ["533"],
-    "nombre": "Trozos de pollo al curry"
+    "codigos": [
+      "124"
+    ],
+    "nombre": "Coliflor Unidad"
   },
   {
-    "codigos": ["723"],
-    "nombre": "Trozos de pollo al tomate casero"
+    "codigos": [
+      "712"
+    ],
+    "nombre": "Costilla de Cerdo Baby Back"
   },
   {
-    "codigos": ["615"],
-    "nombre": "Cuarto de muslo de pollo"
+    "codigos": [
+      "585"
+    ],
+    "nombre": "Costilla de Cerdo Montecillos"
   },
   {
-    "codigos": ["691"],
-    "nombre": "Carnitas de pollo"
+    "codigos": [
+      "75"
+    ],
+    "nombre": "Costilla de Cerdo Tres Jotas"
   },
   {
-    "codigos": ["184"],
-    "nombre": "Filet de pollo marinado"
+    "codigos": [
+      "586"
+    ],
+    "nombre": "Costilla de Res Montecillos"
   },
   {
-    "codigos": ["238"],
-    "nombre": "Muslito de pierna de pollo"
+    "codigos": [
+      "40"
+    ],
+    "nombre": "Costilla de Res Tres Jotas"
   },
   {
-    "codigos": ["32", "57"],
-    "nombre": "Muslo entero de pollo"
+    "codigos": [
+      "615"
+    ],
+    "nombre": "Cuarto de Muslo DC"
   },
   {
-    "codigos": ["56", "34"],
-    "nombre": "Pechuga de pollo deshuesada"
+    "codigos": [
+      "54"
+    ],
+    "nombre": "Cuarto de Muslo Ecopollo"
   },
   {
-    "codigos": ["53", "36"],
-    "nombre": "Pechuga entera de pollo"
+    "codigos": [
+      "123"
+    ],
+    "nombre": "Culantro Castilla Unidad"
   },
   {
-    "codigos": ["95", "4497"],
+    "codigos": [
+      "139"
+    ],
+    "nombre": "Culantro Coyote Unidad"
+  },
+  {
+    "codigos": [
+      "698"
+    ],
+    "nombre": "Diezmillo de Res Signature"
+  },
+  {
+    "codigos": [
+      "121"
+    ],
+    "nombre": "Elote Unidad"
+  },
+  {
+    "codigos": [
+      "158"
+    ],
+    "nombre": "Espinaca Rollo Unidad"
+  },
+  {
+    "codigos": [
+      "511"
+    ],
+    "nombre": "Filete BBQ Pipasa"
+  },
+  {
+    "codigos": [
+      "347"
+    ],
+    "nombre": "Filete Italiano Pipasa"
+  },
+  {
+    "codigos": [
+      "10720"
+    ],
+    "nombre": "Flor de Jamaica Bolsa"
+  },
+  {
+    "codigos": [
+      "210"
+    ],
+    "nombre": "Fresas 225g Unidad"
+  },
+  {
+    "codigos": [
+      "211"
+    ],
+    "nombre": "Fresas 450g Unidad"
+  },
+  {
+    "codigos": [
+      "143"
+    ],
+    "nombre": "Frijol Tierno Bandeja Unidad"
+  },
+  {
+    "codigos": [
+      "12493"
+    ],
+    "nombre": "Granadilla Unidad"
+  },
+  {
+    "codigos": [
+      "263"
+    ],
+    "nombre": "Guanábana Granel"
+  },
+  {
+    "codigos": [
+      "296"
+    ],
+    "nombre": "Guayaba Unidad"
+  },
+  {
+    "codigos": [
+      "294"
+    ],
+    "nombre": "Guineo Unidad"
+  },
+  {
+    "codigos": [
+      "389"
+    ],
+    "nombre": "Hierbabuena Rollo Unidad"
+  },
+  {
+    "codigos": [
+      "244"
+    ],
+    "nombre": "Hoja Para Tamal Granel"
+  },
+  {
+    "codigos": [
+      "400"
+    ],
+    "nombre": "Hongo Crimini Bandeja Unidad"
+  },
+  {
+    "codigos": [
+      "170"
+    ],
+    "nombre": "Hongos Bandeja Unidad"
+  },
+  {
+    "codigos": [
+      "481"
+    ],
+    "nombre": "Hueso Carnudo Tres Jotas"
+  },
+  {
+    "codigos": [
+      "185"
+    ],
+    "nombre": "Hueso de Jarrete Tres Jotas"
+  },
+  {
+    "codigos": [
+      "38"
+    ],
+    "nombre": "Hueso de Pescuezo Montecillos"
+  },
+  {
+    "codigos": [
+      "605"
+    ],
+    "nombre": "Hueso para sopa Montecillos"
+  },
+  {
+    "codigos": [
+      "581"
+    ],
+    "nombre": "Hígado de Res Montecillos"
+  },
+  {
+    "codigos": [
+      "42"
+    ],
+    "nombre": "Hígado de Res Tres Jotas"
+  },
+  {
+    "codigos": [
+      "80"
+    ],
+    "nombre": "Jamón Don Quincho"
+  },
+  {
+    "codigos": [
+      "113"
+    ],
+    "nombre": "Jengibre Granel"
+  },
+  {
+    "codigos": [
+      "125"
+    ],
+    "nombre": "Kiwi Granel"
+  },
+  {
+    "codigos": [
+      "284"
+    ],
+    "nombre": "Lechuga Americana Unidad"
+  },
+  {
+    "codigos": [
+      "152"
+    ],
+    "nombre": "Lechuga Hidropónica Unidad"
+  },
+  {
+    "codigos": [
+      "458"
+    ],
+    "nombre": "Lechuga Lollo Rosa Unidad"
+  },
+  {
+    "codigos": [
+      "84"
+    ],
+    "nombre": "Lengua de Res Tres Jotas"
+  },
+  {
+    "codigos": [
+      "153"
+    ],
+    "nombre": "Limón Mandarina Unidad"
+  },
+  {
+    "codigos": [
+      "136"
+    ],
+    "nombre": "Limón Mesino Unidad"
+  },
+  {
+    "codigos": [
+      "213"
+    ],
+    "nombre": "Mamón Chino Granel"
+  },
+  {
+    "codigos": [
+      "162"
+    ],
+    "nombre": "Mandarina Importada Granel"
+  },
+  {
+    "codigos": [
+      "215"
+    ],
+    "nombre": "Mandarina Nacional Unidad"
+  },
+  {
+    "codigos": [
+      "108"
+    ],
+    "nombre": "Manga Granel"
+  },
+  {
+    "codigos": [
+      "394"
+    ],
+    "nombre": "Mango Pequeño Unidad"
+  },
+  {
+    "codigos": [
+      "130"
+    ],
+    "nombre": "Manzana Amarilla Unidad"
+  },
+  {
+    "codigos": [
+      "140"
+    ],
+    "nombre": "Manzana Gala 6uds"
+  },
+  {
+    "codigos": [
+      "344"
+    ],
+    "nombre": "Manzana Gala Unidad"
+  },
+  {
+    "codigos": [
+      "148"
+    ],
+    "nombre": "Manzana Mixta 6uds"
+  },
+  {
+    "codigos": [
+      "516"
+    ],
+    "nombre": "Manzana Nacional Bolsa Unidad"
+  },
+  {
+    "codigos": [
+      "118"
+    ],
+    "nombre": "Manzana Roja Unidad"
+  },
+  {
+    "codigos": [
+      "119"
+    ],
+    "nombre": "Manzana Verde Unidad"
+  },
+  {
+    "codigos": [
+      "165"
+    ],
+    "nombre": "Maracuyá Granel"
+  },
+  {
+    "codigos": [
+      "159"
+    ],
+    "nombre": "Maíz Dulce Bandeja Unidad"
+  },
+  {
+    "codigos": [
+      "111"
+    ],
+    "nombre": "Melocotón Granel"
+  },
+  {
+    "codigos": [
+      "217"
+    ],
+    "nombre": "Melón Granel"
+  },
+  {
+    "codigos": [
+      "402"
+    ],
+    "nombre": "Menta Rollo Unidad"
+  },
+  {
+    "codigos": [
+      "92"
+    ],
+    "nombre": "Menudos DC"
+  },
+  {
+    "codigos": [
+      "382"
+    ],
+    "nombre": "Menudos Ecopollo"
+  },
+  {
+    "codigos": [
+      "35"
+    ],
+    "nombre": "Menudos Pipasa"
+  },
+  {
+    "codigos": [
+      "647"
+    ],
+    "nombre": "Molida Económica Montecillos"
+  },
+  {
+    "codigos": [
+      "74"
+    ],
+    "nombre": "Molida Especial Tres Jotas"
+  },
+  {
+    "codigos": [
+      "645"
+    ],
+    "nombre": "Molida Premium Almacén"
+  },
+  {
+    "codigos": [
+      "93"
+    ],
+    "nombre": "Mollejas DC"
+  },
+  {
+    "codigos": [
+      "375"
+    ],
+    "nombre": "Mollejas Ecopollo"
+  },
+  {
+    "codigos": [
+      "593"
+    ],
+    "nombre": "Mondongo Montecillos"
+  },
+  {
+    "codigos": [
+      "44"
+    ],
+    "nombre": "Mondongo Tres Jotas"
+  },
+  {
+    "codigos": [
+      "416"
+    ],
+    "nombre": "Mortadela Criolla Kimby"
+  },
+  {
+    "codigos": [
+      "8"
+    ],
+    "nombre": "Mortadela Familiar Kimby"
+  },
+  {
+    "codigos": [
+      "83"
+    ],
+    "nombre": "Mortadela Jamonada Don Quincho"
+  },
+  {
+    "codigos": [
+      "468"
+    ],
+    "nombre": "Mortadela Jamonada Kimby"
+  },
+  {
+    "codigos": [
+      "71"
+    ],
+    "nombre": "Mortadela con Chile Dulce Don Quincho"
+  },
+  {
+    "codigos": [
+      "430"
+    ],
+    "nombre": "Mortadela con Chile Dulce Kimby"
+  },
+  {
+    "codigos": [
+      "16"
+    ],
+    "nombre": "Mortadela con Tocino Don Quincho"
+  },
+  {
+    "codigos": [
+      "459"
+    ],
+    "nombre": "Mortadela con Tocino Kimby"
+  },
+  {
+    "codigos": [
+      "62"
+    ],
+    "nombre": "Mortadela de Pollo Kimby"
+  },
+  {
+    "codigos": [
+      "500"
+    ],
+    "nombre": "Mostaza China Unidad"
+  },
+  {
+    "codigos": [
+      "191"
+    ],
+    "nombre": "Muslito de Ala DC"
+  },
+  {
+    "codigos": [
+      "251"
+    ],
+    "nombre": "Muslito de Ala Ecopollo"
+  },
+  {
+    "codigos": [
+      "686"
+    ],
+    "nombre": "Muslo Deshuesado DC"
+  },
+  {
+    "codigos": [
+      "427"
+    ],
+    "nombre": "Muslo Deshuesado Ecopollo"
+  },
+  {
+    "codigos": [
+      "192"
+    ],
+    "nombre": "Muslo Deshuesado Pipasa"
+  },
+  {
+    "codigos": [
+      "313"
+    ],
+    "nombre": "Muslo Entero DC"
+  },
+  {
+    "codigos": [
+      "57"
+    ],
+    "nombre": "Muslo Entero Ecopollo"
+  },
+  {
+    "codigos": [
+      "32"
+    ],
+    "nombre": "Muslo Entero Pipasa"
+  },
+  {
+    "codigos": [
+      "505"
+    ],
+    "nombre": "Muslo Entero Tres Jotas"
+  },
+  {
+    "codigos": [
+      "238"
+    ],
+    "nombre": "Muslo de Muslo DC"
+  },
+  {
+    "codigos": [
+      "156"
+    ],
+    "nombre": "Muslo de Muslo Ecopollo"
+  },
+  {
+    "codigos": [
+      "147"
+    ],
+    "nombre": "Naranja Importada Unidad"
+  },
+  {
+    "codigos": [
+      "48465"
+    ],
+    "nombre": "Naranja Nacional Unidad"
+  },
+  {
+    "codigos": [
+      "223"
+    ],
+    "nombre": "Orégano Rollo Unidad"
+  },
+  {
+    "codigos": [
+      "595"
+    ],
+    "nombre": "Osobuco De Res Montecillos"
+  },
+  {
+    "codigos": [
+      "324"
+    ],
+    "nombre": "Paleta de Cerdo Tres Jotas"
+  },
+  {
+    "codigos": [
+      "309"
+    ],
+    "nombre": "Palmito Unidad"
+  },
+  {
+    "codigos": [
+      "345"
+    ],
+    "nombre": "Palomitas Ecopollo"
+  },
+  {
+    "codigos": [
+      "35"
+    ],
+    "nombre": "Palomitas Marinadas Pipasa"
+  },
+  {
+    "codigos": [
+      "424"
+    ],
+    "nombre": "Panzada Tres Jotas"
+  },
+  {
+    "codigos": [
+      "95"
+    ],
     "nombre": "Papa Granel"
   },
   {
-    "codigos": ["594"],
-    "nombre": "Bistec de cerdo arreglado bbq"
+    "codigos": [
+      "164"
+    ],
+    "nombre": "Papa Mini Malla Granel"
   },
   {
-    "codigos": ["657"],
-    "nombre": "Chuleta de cerdo"
+    "codigos": [
+      "675"
+    ],
+    "nombre": "Papa Pequeña Granel"
   },
   {
-    "codigos": ["733"],
-    "nombre": "Posta de paleta de cerdo"
+    "codigos": [
+      "150"
+    ],
+    "nombre": "Papa Roja Granel"
   },
   {
-    "codigos": ["591"],
-    "nombre": "Posta de cerdo"
+    "codigos": [
+      "580"
+    ],
+    "nombre": "Papada Montecillos"
   },
   {
-    "codigos": ["596"],
-    "nombre": "Bistec de res arreglado al churrasco"
+    "codigos": [
+      "73"
+    ],
+    "nombre": "Papada Tres Jotas"
   },
   {
-    "codigos": ["605"],
-    "nombre": "Hueso para sopa de res"
+    "codigos": [
+      "106"
+    ],
+    "nombre": "Papaya Granel"
   },
   {
-    "codigos": ["647"],
-    "nombre": "Molida de res economica"
+    "codigos": [
+      "194"
+    ],
+    "nombre": "Pechuga Deshuesada DC"
   },
   {
-    "codigos": ["668"],
-    "nombre": "Molida de res premium"
+    "codigos": [
+      "56"
+    ],
+    "nombre": "Pechuga Deshuesada Ecopollo"
   },
   {
-    "codigos": ["642"],
-    "nombre": "Trocitos de posta de res"
+    "codigos": [
+      "34"
+    ],
+    "nombre": "Pechuga Deshuesada Pipasa"
   },
   {
-    "codigos": ["310"],
-    "nombre": "Trocitos especiales de pollo"
+    "codigos": [
+      "89"
+    ],
+    "nombre": "Pechuga Entera DC"
   },
   {
-    "codigos": ["753"],
-    "nombre": "Trocitos de pechuga"
+    "codigos": [
+      "53"
+    ],
+    "nombre": "Pechuga Entera Ecopollo"
   },
   {
-    "codigos": ["127"],
-    "nombre": "Pera Unidad"
+    "codigos": [
+      "36"
+    ],
+    "nombre": "Pechuga Entera Pipasa"
+  },
+  {
+    "codigos": [
+      "226"
+    ],
+    "nombre": "Pejibaye Granel"
+  },
+  {
+    "codigos": [
+      "196"
+    ],
+    "nombre": "Pellejo Montecillos"
+  },
+  {
+    "codigos": [
+      "204"
+    ],
+    "nombre": "Pellejo Tres Jotas (Tocino)"
+  },
+  {
+    "codigos": [
+      "103"
+    ],
+    "nombre": "Pepino Granel"
+  },
+  {
+    "codigos": [
+      "127"
+    ],
+    "nombre": "Pera Grande Unidad"
+  },
+  {
+    "codigos": [
+      "665"
+    ],
+    "nombre": "Pera Pequeña Unidad"
+  },
+  {
+    "codigos": [
+      "227"
+    ],
+    "nombre": "Perejil Rollo Unidad"
+  },
+  {
+    "codigos": [
+      "618"
+    ],
+    "nombre": "Pezuña Montecillos "
+  },
+  {
+    "codigos": [
+      "197"
+    ],
+    "nombre": "Pezuña Tres Jotas"
+  },
+  {
+    "codigos": [
+      "448"
+    ],
+    "nombre": "Pipa Verde Unidad"
+  },
+  {
+    "codigos": [
+      "422"
+    ],
+    "nombre": "Piña Mediana Unidad"
+  },
+  {
+    "codigos": [
+      "725"
+    ],
+    "nombre": "Piña Pequeña 2Pack"
+  },
+  {
+    "codigos": [
+      "151"
+    ],
+    "nombre": "Piña Unidad"
+  },
+  {
+    "codigos": [
+      "117"
+    ],
+    "nombre": "Plátano Unidad"
+  },
+  {
+    "codigos": [
+      "250"
+    ],
+    "nombre": "Pollo Entero Ecopollo"
+  },
+  {
+    "codigos": [
+      "688"
+    ],
+    "nombre": "Pollo Entero Partido Ecopollo"
+  },
+  {
+    "codigos": [
+      "591"
+    ],
+    "nombre": "Posta Montecillos"
+  },
+  {
+    "codigos": [
+      "69"
+    ],
+    "nombre": "Posta de cerdo Tres Jotas"
+  },
+  {
+    "codigos": [
+      "566"
+    ],
+    "nombre": "Posta para Tamal Tres Jotas"
+  },
+  {
+    "codigos": [
+      "478"
+    ],
+    "nombre": "Puerro Rollo Unidad"
+  },
+  {
+    "codigos": [
+      "648"
+    ],
+    "nombre": "Rabo de Cerdo Tres Jotas"
+  },
+  {
+    "codigos": [
+      "590"
+    ],
+    "nombre": "Recorte de Cerdo Montecillos"
+  },
+  {
+    "codigos": [
+      "128"
+    ],
+    "nombre": "Remolacha Unidad"
+  },
+  {
+    "codigos": [
+      "115"
+    ],
+    "nombre": "Repollo Morado Granel"
+  },
+  {
+    "codigos": [
+      "98"
+    ],
+    "nombre": "Repollo Verde Granel"
+  },
+  {
+    "codigos": [
+      "163"
+    ],
+    "nombre": "Rábano Rollo Unidad"
+  },
+  {
+    "codigos": [
+      "354"
+    ],
+    "nombre": "Salchicha Linea Familiar Kimby"
+  },
+  {
+    "codigos": [
+      "265"
+    ],
+    "nombre": "Salchicha de Pollo Don Quincho"
+  },
+  {
+    "codigos": [
+      "77"
+    ],
+    "nombre": "Salchicha de Pollo Kimby"
+  },
+  {
+    "codigos": [
+      "18"
+    ],
+    "nombre": "Salchichón Ahumado Don Quincho"
+  },
+  {
+    "codigos": [
+      "283"
+    ],
+    "nombre": "Salchichón Ahumado Picante Don Quincho"
+  },
+  {
+    "codigos": [
+      "706"
+    ],
+    "nombre": "Salchichón C. Queso Tucurrique"
+  },
+  {
+    "codigos": [
+      "536"
+    ],
+    "nombre": "Salchichón Carnicero"
+  },
+  {
+    "codigos": [
+      "621"
+    ],
+    "nombre": "Salchichón Criollo Kimby"
+  },
+  {
+    "codigos": [
+      "692"
+    ],
+    "nombre": "Salchichón Criollo Picante Kimby"
+  },
+  {
+    "codigos": [
+      "330"
+    ],
+    "nombre": "Salchichón Familiar Kimby"
+  },
+  {
+    "codigos": [
+      "378"
+    ],
+    "nombre": "Salchichón Familiar Picante Kimby"
+  },
+  {
+    "codigos": [
+      "671"
+    ],
+    "nombre": "Salchichón La Granja"
+  },
+  {
+    "codigos": [
+      "705"
+    ],
+    "nombre": "Salchichón Morocho Tucurrique"
+  },
+  {
+    "codigos": [
+      "70"
+    ],
+    "nombre": "Salchichón Parrillero Cinta Azul"
+  },
+  {
+    "codigos": [
+      "710"
+    ],
+    "nombre": "Salchichón Parrillero Delicia"
+  },
+  {
+    "codigos": [
+      "666"
+    ],
+    "nombre": "Salchichón con Pejibaye Tucurrique"
+  },
+  {
+    "codigos": [
+      "611"
+    ],
+    "nombre": "Salchichón de Cerdo Montecillos"
+  },
+  {
+    "codigos": [
+      "161"
+    ],
+    "nombre": "Salchichón de Pollo Don Quincho"
+  },
+  {
+    "codigos": [
+      "685"
+    ],
+    "nombre": "Salchichón para Asar Premier"
+  },
+  {
+    "codigos": [
+      "107"
+    ],
+    "nombre": "Sandía Granel"
+  },
+  {
+    "codigos": [
+      "452"
+    ],
+    "nombre": "Tomate Cherry Bandeja Unidad"
+  },
+  {
+    "codigos": [
+      "97"
+    ],
+    "nombre": "Tomate Granel"
+  },
+  {
+    "codigos": [
+      "230"
+    ],
+    "nombre": "Tomate Pequeño Granel"
+  },
+  {
+    "codigos": [
+      "171"
+    ],
+    "nombre": "Tomillo Rollo Unidad"
+  },
+  {
+    "codigos": [
+      "405"
+    ],
+    "nombre": "Tomillo de 5 uds"
+  },
+  {
+    "codigos": [
+      "717"
+    ],
+    "nombre": "Toronja Unidad"
+  },
+  {
+    "codigos": [
+      "249"
+    ],
+    "nombre": "Trocitos Ecopollo"
+  },
+  {
+    "codigos": [
+      "310"
+    ],
+    "nombre": "Trocitos Pipasa"
+  },
+  {
+    "codigos": [
+      "78"
+    ],
+    "nombre": "Trocitos de Cerdo Tres Jotas"
+  },
+  {
+    "codigos": [
+      "642"
+    ],
+    "nombre": "Trocitos de Res Montecillos"
+  },
+  {
+    "codigos": [
+      "47"
+    ],
+    "nombre": "Trocitos de Res Tres Jotas"
+  },
+  {
+    "codigos": [
+      "532"
+    ],
+    "nombre": "Trozo BBQ Ecopollo"
+  },
+  {
+    "codigos": [
+      "28"
+    ],
+    "nombre": "Trozo BBQ Pipasa"
+  },
+  {
+    "codigos": [
+      "676"
+    ],
+    "nombre": "Trozo Criollo Ecopollo"
+  },
+  {
+    "codigos": [
+      "533"
+    ],
+    "nombre": "Trozo Curry Ecopollo"
+  },
+  {
+    "codigos": [
+      "683"
+    ],
+    "nombre": "Trozo Mostaza Miel Ecopollo"
+  },
+  {
+    "codigos": [
+      "723"
+    ],
+    "nombre": "Trozo Tomatito Ecopollo"
+  },
+  {
+    "codigos": [
+      "334"
+    ],
+    "nombre": "Uchuva Bandeja Unidad"
+  },
+  {
+    "codigos": [
+      "109"
+    ],
+    "nombre": "Uva Globo Granel"
+  },
+  {
+    "codigos": [
+      "383"
+    ],
+    "nombre": "Uva Negra Granel"
+  },
+  {
+    "codigos": [
+      "8486",
+      "232"
+    ],
+    "nombre": "Uva Verde Granel"
+  },
+  {
+    "codigos": [
+      "358"
+    ],
+    "nombre": "Vainica Bolsa 500g Unidad"
+  },
+  {
+    "codigos": [
+      "100"
+    ],
+    "nombre": "Yuca Granel"
+  },
+  {
+    "codigos": [
+      "99"
+    ],
+    "nombre": "Zanahoria Granel"
+  },
+  {
+    "codigos": [
+      "674"
+    ],
+    "nombre": "Zanahoria Pequeña Granel"
+  },
+  {
+    "codigos": [
+      "131"
+    ],
+    "nombre": "Zapallo Unidad"
+  },
+  {
+    "codigos": [
+      "110"
+    ],
+    "nombre": "Ñampi Granel"
   }
 ]

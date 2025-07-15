@@ -367,7 +367,6 @@ input.nombreArchivoZip {
 
 input.nombreArchivoZip:focus {
   border-bottom: 1.5px solid var(--color-primario);
-  color: var(--color-primario);
 }
 
 /* Quitar los botones de incremento y decremento en los campos de tipo number */

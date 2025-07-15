@@ -353,6 +353,23 @@ label {
   transform: none;
 }
 
+input.nombreArchivoZip {
+  padding: 2px;
+  max-width: 130px;
+  border: none;
+  border-bottom: 1.5px solid var(--color-borde);
+  outline: none;
+  background: transparent;
+  color: var(--color-texto);  
+  box-sizing: border-box;
+  transition: ease 0.3s all;
+}
+
+input.nombreArchivoZip:focus {
+  border-bottom: 1.5px solid var(--color-primario);
+  color: var(--color-primario);
+}
+
 /* Quitar los botones de incremento y decremento en los campos de tipo number */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button { /* Para Chrome, Safari, Edge, Opera */

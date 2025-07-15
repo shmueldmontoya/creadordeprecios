@@ -35,6 +35,7 @@ const DOM_ELEMENTS = {
   anterior: document.getElementById('anterior'),
   promo: document.getElementById('promo'),
   codigo: document.getElementById('codigo'),
+  nombreArchivoZip: document.getElementById('nombreArchivoZip'),
   
   // Campos de tipo de venta
   inputkg: document.getElementById('inputkg'),
@@ -808,7 +809,7 @@ const descargarLoteRotulos = async () => {
 
     const contenido = await zip.generateAsync({type: 'blob'});
     const enlace = document.createElement('a');
-    enlace.download = 'rotulos-lote.zip';
+    enlace.download = DOM_ELEMENTS.nombreArchivoZip.value || 'rotulos-lote.zip';
     enlace.href = URL.createObjectURL(contenido);
     enlace.click();
 

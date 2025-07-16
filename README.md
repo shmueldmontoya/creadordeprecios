@@ -2,7 +2,7 @@
 
 Una aplicación web moderna y personalizable para generar rótulos de precios para tiendas, supermercados y negocios, completamente configurable.
 
-![Generador de Rótulos](https://img.shields.io/badge/Version-2.0.0-blue)
+![Generador de Rótulos](https://img.shields.io/badge/Version-2.1.0-blue)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow)
 ![CSS3](https://img.shields.io/badge/CSS3-Latest-green)
 ![HTML5](https://img.shields.io/badge/HTML5-Latest-orange)

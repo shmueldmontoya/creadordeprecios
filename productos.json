@@ -1,0 +1,202 @@
+[
+  {
+    "codigos": ["001"],
+    "nombre": "Manzana Roja"
+  },
+  {
+    "codigos": ["002"],
+    "nombre": "Plátano"
+  },
+  {
+    "codigos": ["003"],
+    "nombre": "Naranja"
+  },
+  {
+    "codigos": ["004"],
+    "nombre": "Lechuga"
+  },
+  {
+    "codigos": ["005"],
+    "nombre": "Tomate"
+  },
+  {
+    "codigos": ["006"],
+    "nombre": "Cebolla"
+  },
+  {
+    "codigos": ["007"],
+    "nombre": "Papa"
+  },
+  {
+    "codigos": ["008"],
+    "nombre": "Zanahoria"
+  },
+  {
+    "codigos": ["009"],
+    "nombre": "Brócoli"
+  },
+  {
+    "codigos": ["010"],
+    "nombre": "Espinaca"
+  },
+  {
+    "codigos": ["011"],
+    "nombre": "Pollo Entero"
+  },
+  {
+    "codigos": ["012"],
+    "nombre": "Carne de Res"
+  },
+  {
+    "codigos": ["013"],
+    "nombre": "Cerdo"
+  },
+  {
+    "codigos": ["014"],
+    "nombre": "Pescado"
+  },
+  {
+    "codigos": ["015"],
+    "nombre": "Huevos"
+  },
+  {
+    "codigos": ["016"],
+    "nombre": "Leche"
+  },
+  {
+    "codigos": ["017"],
+    "nombre": "Queso"
+  },
+  {
+    "codigos": ["018"],
+    "nombre": "Yogurt"
+  },
+  {
+    "codigos": ["019"],
+    "nombre": "Pan"
+  },
+  {
+    "codigos": ["020"],
+    "nombre": "Arroz"
+  },
+  {
+    "codigos": ["021"],
+    "nombre": "Frijoles"
+  },
+  {
+    "codigos": ["022"],
+    "nombre": "Aceite de Oliva"
+  },
+  {
+    "codigos": ["023"],
+    "nombre": "Azúcar"
+  },
+  {
+    "codigos": ["024"],
+    "nombre": "Sal"
+  },
+  {
+    "codigos": ["025"],
+    "nombre": "Harina"
+  },
+  {
+    "codigos": ["026"],
+    "nombre": "Pasta"
+  },
+  {
+    "codigos": ["027"],
+    "nombre": "Sopa"
+  },
+  {
+    "codigos": ["028"],
+    "nombre": "Cereal"
+  },
+  {
+    "codigos": ["029"],
+    "nombre": "Galletas"
+  },
+  {
+    "codigos": ["030"],
+    "nombre": "Chocolate"
+  },
+  {
+    "codigos": ["031"],
+    "nombre": "Refresco"
+  },
+  {
+    "codigos": ["032"],
+    "nombre": "Agua"
+  },
+  {
+    "codigos": ["033"],
+    "nombre": "Jugo"
+  },
+  {
+    "codigos": ["034"],
+    "nombre": "Cerveza"
+  },
+  {
+    "codigos": ["035"],
+    "nombre": "Vino"
+  },
+  {
+    "codigos": ["036"],
+    "nombre": "Detergente"
+  },
+  {
+    "codigos": ["037"],
+    "nombre": "Jabón"
+  },
+  {
+    "codigos": ["038"],
+    "nombre": "Shampoo"
+  },
+  {
+    "codigos": ["039"],
+    "nombre": "Pasta Dental"
+  },
+  {
+    "codigos": ["040"],
+    "nombre": "Papel Higiénico"
+  },
+  {
+    "codigos": ["041"],
+    "nombre": "Toallas"
+  },
+  {
+    "codigos": ["042"],
+    "nombre": "Baterías"
+  },
+  {
+    "codigos": ["043"],
+    "nombre": "Bombillas"
+  },
+  {
+    "codigos": ["044"],
+    "nombre": "Pilas"
+  },
+  {
+    "codigos": ["045"],
+    "nombre": "Cables"
+  },
+  {
+    "codigos": ["046"],
+    "nombre": "Herramientas"
+  },
+  {
+    "codigos": ["047"],
+    "nombre": "Pintura"
+  },
+  {
+    "codigos": ["048"],
+    "nombre": "Pinceles"
+  },
+  {
+    "codigos": ["049"],
+    "nombre": "Libros"
+  },
+  {
+    "codigos": ["050"],
+    "nombre": "Revistas"
+  }
+] 

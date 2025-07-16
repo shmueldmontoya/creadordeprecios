@@ -458,9 +458,14 @@ const actualizarRotulo = () => {
   }
   
   // Actualizar precio anterior y ahorro
-  if (anterior > 0 && ahorro > 0) {
-    DOM_ELEMENTS.textoAnterior.textContent = `Precio regular: ${window.Utils.formatearPrecio(anterior)}`;
-    DOM_ELEMENTS.textoAhorre.textContent = `Ahorro: ${window.Utils.formatearPrecio(ahorro)}`;
+  if (window.Utils.esPrecioValido(anterior)) {
+    if (ahorro > 0) {
+      DOM_ELEMENTS.textoAnterior.textContent = `Precio regular: ${window.Utils.formatearPrecio(anterior)}`;
+      DOM_ELEMENTS.textoAhorre.textContent = `Ahorro: ${window.Utils.formatearPrecio(ahorro)}`;
+    } else {
+      DOM_ELEMENTS.textoAnterior.textContent = '';
+      DOM_ELEMENTS.textoAhorre.textContent = '';
+    }
   } else {
     DOM_ELEMENTS.textoAnterior.textContent = '';
     DOM_ELEMENTS.textoAhorre.textContent = '';
@@ -533,21 +538,13 @@ const obtenerDatosRotulo = () => {
  * @returns {boolean} True si los datos son válidos
  */
 const validarDatosRotulo = (datos) => {
-  if (!datos.producto) {
-    window.Utils.mostrarError('Por favor ingresa el nombre del producto.');
+  const resultado = window.Validation.validarRotulo(datos);
+  if (!resultado.isValid) {
+    if (resultado.errors && resultado.errors.length > 0) {
+      window.Utils.mostrarError(resultado.errors[0]);
+    }
     return false;
   }
-  
-  if (!window.Utils.esPrecioValido(datos.actual)) {
-    window.Utils.mostrarError('Debes ingresar al menos el precio actual.');
-    return false;
-  }
-  
-  if (window.Utils.esPrecioValido(datos.anterior) && datos.ahorro <= 0) {
-    window.Utils.mostrarError('El precio actual no puede ser igual o mayor que el precio anterior.');
-    return false;
-  }
-  
   return true;
 };
 
@@ -829,10 +826,24 @@ const generarCanvasRotulo = async (rotulo) => {
   }
 
   if (window.Utils.esPrecioValido(rotulo.actual) && window.Utils.esPrecioValido(rotulo.anterior)) {
-    textoAnterior.textContent = `Precio regular: ${window.Utils.formatearPrecio(rotulo.anterior)}`;
-    textoAhorre.textContent = `Ahorro: ${window.Utils.formatearPrecio(rotulo.ahorro)}`;
-    textoAnterior.style.display = 'block';
-    textoAhorre.style.display = 'block';
+    if (window.Utils.esPrecioValido(rotulo.anterior)) {
+      if (window.Utils.esPrecioValido(rotulo.actual) && rotulo.ahorro > 0) {
+        textoAnterior.textContent = `Precio regular: ${window.Utils.formatearPrecio(rotulo.anterior)}`;
+        textoAhorre.textContent = `Ahorro: ${window.Utils.formatearPrecio(rotulo.ahorro)}`;
+        textoAnterior.style.display = 'block';
+        textoAhorre.style.display = 'block';
+      } else {
+        textoAnterior.textContent = '';
+        textoAhorre.textContent = '';
+        textoAnterior.style.display = 'none';
+        textoAhorre.style.display = 'none';
+      }
+    } else {
+      textoAnterior.textContent = '';
+      textoAhorre.textContent = '';
+      textoAnterior.style.display = 'none';
+      textoAhorre.style.display = 'none';
+    }
   } else {
     textoAnterior.textContent = '';
     textoAhorre.textContent = '';
@@ -1229,17 +1240,12 @@ function inicializarModalEditarRotulo() {
     datos.ahorro = datos.anterior - datos.actual;
     datos.timestamp = Date.now();
     
-    // Validación estricta
-    if (!datos.producto) {
-      window.Utils.mostrarError('El nombre del producto es obligatorio');
-      return;
-    }
-    if (!datos.actual || datos.actual <= 0) {
-      window.Utils.mostrarError('El precio actual es obligatorio y debe ser mayor que 0');
-      return;
-    }
-    if (datos.anterior && datos.anterior <= datos.actual) {
-      window.Utils.mostrarError('El precio anterior debe ser mayor que el precio actual');
+    // Validación estricta usando validación centralizada
+    const resultado = window.Validation.validarRotulo(datos);
+    if (!resultado.isValid) {
+      if (resultado.errors && resultado.errors.length > 0) {
+        window.Utils.mostrarError(resultado.errors[0]);
+      }
       return;
     }
     if (APP_STATE.editandoIndice !== null) {

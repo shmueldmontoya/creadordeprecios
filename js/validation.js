@@ -17,24 +17,25 @@ window.Validation.validarRotulo = (datos) => {
   
   // Validar producto
   if (config.requireProduct) {
-    if (!datos.producto || !window.Utils.validarTexto(datos.producto, 'product')) {
-      errors.push('El nombre del producto es requerido y debe tener máximo ' + config.maxProductLength + ' caracteres');
+    if (!datos.producto) {
+      errors.push('El nombre del producto es requerido');
+    }
+    if (!window.Utils.validarTexto(datos.producto, 'product')) {
+      errors.push('El nombre del producto debe tener máximo ' + config.maxProductLength + ' caracteres');
     }
   }
   
   // Validar precio actual
   if (config.requireCurrentPrice) {
-    if (!window.Utils.esPrecioValido(datos.actual)) {
-      errors.push('El precio actual es requerido y debe ser mayor a ' + config.minPrice);
+    if (!datos.actual) {
+      errors.push('El precio actual es requerido');
     }
+    if (!window.Utils.esPrecioValido(datos.actual) || parseFloat(datos.actual) === 0) {
+      errors.push('El precio actual debe ser mayor a ' + config.minPrice + ' y menor a ' + config.maxPrice);
+    }
+    
   }
   
-  // Validar código (opcional)
-  if (config.requireCode && datos.codigo) {
-    if (!window.Utils.validarTexto(datos.codigo, 'code')) {
-      errors.push('El código debe tener máximo ' + config.maxCodeLength + ' caracteres');
-    }
-  }
   
   // Validar precio anterior (si se proporciona)
   if (datos.anterior && !window.Utils.esPrecioValido(datos.anterior)) {
@@ -51,7 +52,7 @@ window.Validation.validarRotulo = (datos) => {
     const anterior = parseFloat(datos.anterior);
     const actual = parseFloat(datos.actual);
     if (anterior <= actual) {
-      errors.push('El precio anterior debe ser mayor al precio actual para mostrar ahorro');
+      errors.push('El precio anterior debe ser mayor al precio actual');
     }
   }
   

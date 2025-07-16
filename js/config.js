@@ -76,7 +76,6 @@ const APP_CONFIG = {
     minPrice: 0, // Precio mínimo
     maxPrice: 999999, // Precio máximo
     maxProductLength: 50, // Longitud máxima del nombre del producto
-    maxCodeLength: 20 // Longitud máxima del código
   },
 
   // ============================================================================

@@ -1,0 +1,20 @@
+# Carpetas de configuración de editores
+.vscode/
+.idea/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+desktop.ini
+
+# Archivos temporales
+*.log
+*.tmp
+
+# Archivos de entorno (si usas Node.js en algún momento)
+node_modules/
+
+# Archivos de compilación (si llegas a usar herramientas de build)
+dist/
+build/ 

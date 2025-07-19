@@ -342,6 +342,9 @@ const limpiarFormulario = () => {
     }
   }
   
+  // Ocultar imagen del producto
+  window.ImageManager?.ocultarImagen();
+  
   // Actualizar rótulo
   actualizarRotulo();
   
@@ -488,7 +491,7 @@ const actualizarRotulo = () => {
   // Actualizar imagen si hay código
   const codigo = DOM_ELEMENTS.codigo.value.trim();
   if (codigo) {
-    cargarImagenProducto(codigo);
+    window.ImageManager?.cargarImagen(codigo);
   }
 };
 
@@ -942,7 +945,7 @@ const autocompletarProducto = () => {
   const codigoIngresado = DOM_ELEMENTS.codigo.value.trim().toUpperCase();
   
   if (!codigoIngresado) {
-    cargarImagenProducto(null); // Ocultar imagen
+    window.ImageManager?.ocultarImagen(); // Ocultar imagen
     return;
   }
 
@@ -957,7 +960,7 @@ const autocompletarProducto = () => {
   }
   
   // Cargar imagen asociada al código
-  cargarImagenProducto(codigoIngresado);
+  window.ImageManager?.cargarImagen(codigoIngresado);
 };
 
 // ============================================================================
@@ -1057,6 +1060,9 @@ const inicializarSistemaFondos = () => {
     } else {
       APP_STATE.linkFondo.href = `css/${fondo}.css`;
     }
+    
+    // Limpiar cache de imágenes cuando se cambia de fondo
+    window.ImageManager?.limpiarCache();
   });
 };
 
@@ -1147,6 +1153,7 @@ const inicializarAplicacion = async () => {
     inicializarControlesPreview(); // Inicializar controles de previsualización
     inicializarModoOscuro(); // Inicializar modo oscuro
     inicializarAtajosTeclado(); // Inicializar atajos de teclado
+    inicializarIntegracionImagenes(); // Inicializar integración con módulo de imágenes
     
     // Configurar event listeners
     inicializarEventListeners();
@@ -1301,52 +1308,28 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================================
-// FUNCIONES PARA MANEJO DE IMÁGENES DE PRODUCTOS
+// INTEGRACIÓN CON MÓDULO DE IMÁGENES
 // ============================================================================
 
 /**
- * Carga y muestra la imagen del producto basada en el código
- * @param {string} codigo - Código del producto
+ * Inicializa la integración con el módulo de imágenes
  */
-const cargarImagenProducto = async (codigo) => {
-  const imagenProducto = document.getElementById('imagen-producto');
-  
-  if (!codigo) {
-    // Ocultar imagen si no hay código
-    imagenProducto.style.display = 'none';
-    imagenProducto.removeAttribute('data-codigo');
+const inicializarIntegracionImagenes = () => {
+  // Verificar que el módulo de imágenes esté disponible
+  if (!window.ImageManager) {
+    console.warn('Módulo de imágenes no disponible');
     return;
   }
   
-  try {
-    // Intentar cargar la imagen desde la carpeta recursos/imagenes/
-    const response = await fetch(`recursos/imagenes/${codigo}`);
-    
-    if (!response.ok) {
-      // Si no existe el archivo, ocultar imagen
-      imagenProducto.style.display = 'none';
-      imagenProducto.removeAttribute('data-codigo');
-      return;
-    }
-    
-    // Obtener el blob de la imagen
-    const blob = await response.blob();
-    
-    // Convertir a base64
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const base64 = e.target.result;
-      
-      // Aplicar imagen
-      imagenProducto.style.backgroundImage = `url('${base64}')`;
-      imagenProducto.style.display = 'block';
-      imagenProducto.setAttribute('data-codigo', codigo);
-    };
-    reader.readAsDataURL(blob);
-    
-  } catch (error) {
-    console.warn(`No se pudo cargar la imagen para el código ${codigo}:`, error);
-    imagenProducto.style.display = 'none';
-    imagenProducto.removeAttribute('data-codigo');
-  }
+  // Inicializar el módulo de imágenes
+  window.ImageManager.inicializar();
+  
+  // Event listeners para eventos del módulo de imágenes
+  document.addEventListener('imagenCargada', (e) => {
+    console.log('Imagen cargada:', e.detail.codigo);
+  });
+  
+  document.addEventListener('imagenOcultada', () => {
+    console.log('Imagen ocultada');
+  });
 };

@@ -100,6 +100,7 @@ creadordepreciosfinal-main/
 │   ├── utils.js            # Utilidades y funciones comunes
 │   ├── validation.js       # Sistema de validación
 │   ├── templates.js        # Plantillas HTML dinámicas
+│   ├── images.js           # Módulo de manejo de imágenes
 │   ├── main.js             # Lógica principal
 │   └── productos.json      # Base de datos de productos
 ├── css/
@@ -110,9 +111,11 @@ creadordepreciosfinal-main/
 │   └── fondo3.css          # Diseño de fondo 3
 ├── herramientas/
 │   ├── generador-fondos.html # Herramienta para crear fondos
-│   └── README-herramientas.md # Documentación de herramientas
+│   └── convertidor-imagenes.html # Herramienta para convertir imágenes
 ├── recursos/
-│   └── fuentes/            # Fuentes personalizadas
+│   ├── fuentes/            # Fuentes personalizadas
+│   └── imagenes/           # Imágenes de productos por código
+
 ├── README.md               # Este archivo
 └── LICENSE                 # Licencia MIT
 ```
@@ -155,9 +158,39 @@ creadordepreciosfinal-main/
 - **Función**: Convierte imágenes PNG/JPG a CSS Base64 y ajusta posiciones de textos
 - **Uso**: Abre en tu navegador y sigue las instrucciones
 
+#### Convertidor de Imágenes de Productos
+- **Ubicación**: `herramientas/convertidor-imagenes.html`
+- **Función**: Convierte imágenes a Base64 para usar como imágenes de productos
+- **Uso**: 
+  1. Abre en tu navegador
+  2. Selecciona una imagen
+  3. Ingresa el código del producto
+  4. Descarga el archivo
+  5. Guárdalo en `recursos/imagenes/` con el nombre del código
+
 ### 🖼️ Fondos Personalizados
 
 **IMPORTANTE**: Los fondos NO son imágenes PNG/JPG, sino **CSS con imágenes convertidas a Base64**.
+
+### 🖼️ Imágenes de Productos
+
+El sistema ahora soporta imágenes de productos que se muestran automáticamente cuando ingresas un código:
+
+1. **Preparar la imagen**:
+   - Usa `herramientas/convertidor-imagenes.html`
+   - Convierte tu imagen a Base64
+   - Guarda el archivo de texto con el nombre del código en `recursos/imagenes/`
+   - El archivo debe contener el Base64 completo (data:image/...)
+
+2. **Configurar posiciones**:
+   - Las posiciones se definen en los archivos CSS de fondo
+   - Cada fondo puede tener posiciones diferentes
+   - Se pueden definir posiciones específicas por código
+
+3. **Ejemplo de uso**:
+   - Ingresa código "97" → se busca `recursos/imagenes/97`
+   - Si existe, se muestra en la posición definida en el CSS
+   - La imagen se incluye automáticamente en la descarga del rótulo
 
 #### Opción 1: Usar el Generador de Fondos (Recomendado)
 

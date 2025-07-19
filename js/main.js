@@ -228,8 +228,9 @@ const obtenerValoresPrecios = () => {
   const actual = parseInt(DOM_ELEMENTS.actual.value) || 0;
   const anterior = parseInt(DOM_ELEMENTS.anterior.value) || 0;
   const ahorro = anterior - actual;
-  
-  return { actual, anterior, ahorro };
+  const promo = parseInt(DOM_ELEMENTS.promo.value) || 0;
+
+  return { actual, anterior, ahorro, promo };
 };
 
 
@@ -450,6 +451,8 @@ const actualizarRotulo = () => {
     const precioFormateado = window.Utils.formatearPrecio(actual);
     if (APP_STATE.unidadSeleccionada) {
       DOM_ELEMENTS.textoActual.innerHTML = `${precioFormateado}<span class="unidad">/${APP_STATE.unidadSeleccionada}</span>`;
+    } else if(DOM_ELEMENTS.promo.value > 0) {
+      DOM_ELEMENTS.textoActual.innerHTML = `<span class="promo">${DOM_ELEMENTS.promo.value}x </span>${precioFormateado}`;
     } else {
       DOM_ELEMENTS.textoActual.textContent = precioFormateado;
     }

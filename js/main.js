@@ -229,7 +229,7 @@ const obtenerValoresPrecios = () => {
   const anterior = parseInt(DOM_ELEMENTS.anterior.value) || 0;
   const ahorro = anterior - actual;
   const promo = parseInt(DOM_ELEMENTS.promo.value) || 0;
-
+  
   return { actual, anterior, ahorro, promo };
 };
 
@@ -449,11 +449,22 @@ const actualizarRotulo = () => {
   // Actualizar precio actual
   if (actual > 0) {
     const precioFormateado = window.Utils.formatearPrecio(actual);
+    const promoValue = DOM_ELEMENTS.promo.value;
+    
     if (APP_STATE.unidadSeleccionada) {
-      DOM_ELEMENTS.textoActual.innerHTML = `${precioFormateado}<span class="unidad">/${APP_STATE.unidadSeleccionada}</span>`;
-    } else if(DOM_ELEMENTS.promo.value > 0) {
-      DOM_ELEMENTS.textoActual.innerHTML = `<span class="promo">${DOM_ELEMENTS.promo.value}x </span>${precioFormateado}`;
+      // Si hay unidad seleccionada
+      if (promoValue > 0) {
+        // Si también hay promoción, mostrar ambos
+        DOM_ELEMENTS.textoActual.innerHTML = `<span class="promo">${promoValue}x </span>${precioFormateado}<span class="unidad">/${APP_STATE.unidadSeleccionada}</span>`;
+      } else {
+        // Solo unidad
+        DOM_ELEMENTS.textoActual.innerHTML = `${precioFormateado}<span class="unidad">/${APP_STATE.unidadSeleccionada}</span>`;
+      }
+    } else if (promoValue > 0) {
+      // Solo promoción (sin unidad)
+      DOM_ELEMENTS.textoActual.innerHTML = `<span class="promo">${promoValue}x </span>${precioFormateado}`;
     } else {
+      // Solo precio
       DOM_ELEMENTS.textoActual.textContent = precioFormateado;
     }
   } else {
@@ -817,9 +828,21 @@ const generarCanvasRotulo = async (rotulo) => {
   // Siempre mostrar precio actual
   if (window.Utils.esPrecioValido(rotulo.actual)) {
     const precioFormateado = window.Utils.formatearPrecio(rotulo.actual);
+    
     if (rotulo.unidad) {
-      textoActual.innerHTML = `${precioFormateado}<span class="unidad">/${rotulo.unidad}</span>`;
+      // Si hay unidad seleccionada
+      if (rotulo.promo && rotulo.promo > 0) {
+        // Si también hay promoción, mostrar ambos
+        textoActual.innerHTML = `<span class="promo">${rotulo.promo}x </span>${precioFormateado}<span class="unidad">/${rotulo.unidad}</span>`;
+      } else {
+        // Solo unidad
+        textoActual.innerHTML = `${precioFormateado}<span class="unidad">/${rotulo.unidad}</span>`;
+      }
+    } else if (rotulo.promo && rotulo.promo > 0) {
+      // Solo promoción (sin unidad)
+      textoActual.innerHTML = `<span class="promo">${rotulo.promo}x </span>${precioFormateado}`;
     } else {
+      // Solo precio
       textoActual.textContent = precioFormateado;
     }
     textoActual.style.display = 'block';

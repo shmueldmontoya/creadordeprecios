@@ -484,6 +484,12 @@ const actualizarRotulo = () => {
     DOM_ELEMENTS.textoAnterior.textContent = '';
     DOM_ELEMENTS.textoAhorre.textContent = '';
   }
+  
+  // Actualizar imagen si hay código
+  const codigo = DOM_ELEMENTS.codigo.value.trim();
+  if (codigo) {
+    cargarImagenProducto(codigo);
+  }
 };
 
 /**
@@ -935,7 +941,10 @@ const cargarBaseDatos = async () => {
 const autocompletarProducto = () => {
   const codigoIngresado = DOM_ELEMENTS.codigo.value.trim().toUpperCase();
   
-  if (!codigoIngresado) return;
+  if (!codigoIngresado) {
+    cargarImagenProducto(null); // Ocultar imagen
+    return;
+  }
 
   const productoEncontrado = APP_STATE.baseDatos.find(producto =>
     producto.codigos.includes(codigoIngresado)
@@ -946,6 +955,9 @@ const autocompletarProducto = () => {
     DOM_ELEMENTS.producto.classList.add('no-vacio');
     actualizarRotulo();
   }
+  
+  // Cargar imagen asociada al código
+  cargarImagenProducto(codigoIngresado);
 };
 
 // ============================================================================
@@ -1287,3 +1299,54 @@ function inicializarModalEditarRotulo() {
 document.addEventListener('DOMContentLoaded', function() {
   inicializarModalEditarRotulo();
 });
+
+// ============================================================================
+// FUNCIONES PARA MANEJO DE IMÁGENES DE PRODUCTOS
+// ============================================================================
+
+/**
+ * Carga y muestra la imagen del producto basada en el código
+ * @param {string} codigo - Código del producto
+ */
+const cargarImagenProducto = async (codigo) => {
+  const imagenProducto = document.getElementById('imagen-producto');
+  
+  if (!codigo) {
+    // Ocultar imagen si no hay código
+    imagenProducto.style.display = 'none';
+    imagenProducto.removeAttribute('data-codigo');
+    return;
+  }
+  
+  try {
+    // Intentar cargar la imagen desde la carpeta recursos/imagenes/
+    const response = await fetch(`recursos/imagenes/${codigo}`);
+    
+    if (!response.ok) {
+      // Si no existe el archivo, ocultar imagen
+      imagenProducto.style.display = 'none';
+      imagenProducto.removeAttribute('data-codigo');
+      return;
+    }
+    
+    // Obtener el blob de la imagen
+    const blob = await response.blob();
+    
+    // Convertir a base64
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const base64 = e.target.result;
+      
+      // Aplicar imagen
+      imagenProducto.style.backgroundImage = `url('${base64}')`;
+      imagenProducto.style.display = 'block';
+      imagenProducto.setAttribute('data-codigo', codigo);
+    };
+    reader.readAsDataURL(blob);
+    
+  } catch (error) {
+    console.warn(`No se pudo cargar la imagen para el código ${codigo}:`, error);
+    imagenProducto.style.display = 'none';
+    imagenProducto.removeAttribute('data-codigo');
+  }
+};

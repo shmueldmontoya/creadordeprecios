@@ -248,6 +248,16 @@ label {
   font-size: 35px;
   color: #ffffff;
 }
+
+/* Contenedor de imagen del producto */
+.imagen-producto {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 1;
+  display: none; /* Oculto por defecto */
+}
 .botones-formulario {
   margin: 10px;
 }

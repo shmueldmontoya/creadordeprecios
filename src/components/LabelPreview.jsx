@@ -1,0 +1,67 @@
+import React from "react";
+import { useAppConfig } from "../context/AppConfigContext";
+
+const LabelPreview = ({ producto, actual, anterior, promo, unidad, fondo, codigo }) => {
+  const { labels, store, format } = useAppConfig();
+
+  // Función utilitaria para formatear números según la configuración
+  const formatNumber = (number) => {
+    if (!number || isNaN(Number(number))) return number;
+    const num = Number(number);
+    
+    if (format && format.useThousandSeparator) {
+      let formatted = num.toLocaleString('en-US', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+        useGrouping: true
+      });
+      return formatted;
+    }
+    
+    return num.toString();
+  };
+
+  // Cálculo de ahorro si aplica
+  let ahorro = "";
+  const textoAhorro = labels.textoAhorro || "Ahorro:";
+  const textoPrecioAnterior = labels.textoPrecioAnterior || "Precio regular:";
+  if (anterior && actual && Number(anterior) > Number(actual)) {
+    const diff = Number(anterior) - Number(actual);
+    ahorro = `${store.currency}${formatNumber(diff)}`;
+  }
+
+  // Selección de fondo
+  const fondoConfig = labels.backgrounds.find(bg => bg.id === fondo);
+  const fondoClass = fondoConfig ? `rotulo rotulo-preview ${fondoConfig.id}` : "rotulo rotulo-preview";
+
+  return (
+    <div className="previsualizacion">
+      <h3>Vista Previa del Rótulo</h3>
+      <div className="contenedor-rotulo">
+        <div className={fondoClass} id="rotulo">
+          <div className="producto" id="texto-producto">{producto}</div>
+          <div className="precio-actual" id="texto-actual">
+            {promo && promo > 0 && (
+              <span className="promo" id="texto-promo">
+                {promo}x&nbsp;
+              </span>
+            )}
+            {store.currency}{formatNumber(actual)}
+            {unidad && <span className="unidad"> / {unidad}</span>}
+          </div>
+          <div className="antes" id="texto-anterior">
+            {anterior && Number(anterior) > Number(actual)
+              ? `${textoPrecioAnterior} ${store.currency}${formatNumber(anterior)}`
+              : ""}
+          </div>
+          <div className="ahorre" id="texto-ahorre">{ahorro && `${textoAhorro} ${ahorro}`}</div>
+        </div>
+      </div>
+      <div className="indicador-tamaño" id="indicadorTamaño">
+        Tamaño real: {labels.dimensions.width} x {labels.dimensions.height} píxeles | Vista previa: {Math.round(labels.dimensions.width * labels.dimensions.previewScale)} x {Math.round(labels.dimensions.height * labels.dimensions.previewScale)} píxeles
+      </div>
+    </div>
+  );
+};
+
+export default LabelPreview; 

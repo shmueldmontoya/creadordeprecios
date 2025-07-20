@@ -49,36 +49,3 @@
   font-family: 'Mosk', sans-serif;
 }
 
-/* Posiciones de imágenes para fondo3 */
-.imagen-producto {
-  position: absolute;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  z-index: 1;
-  /* Posición para fondo3 */
-  top: 250px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 80px;
-}
-
-/* Posiciones específicas por código para fondo3 */
-.imagen-producto[data-codigo="97"] {
-  top: 200px;
-  left: 60px;
-  transform: none;
-  width: 100px;
-  height: 100px;
-}
-
-.imagen-producto[data-codigo="230"] {
-  top: 280px;
-  right: 50px;
-  left: auto;
-  transform: none;
-  width: 60px;
-  height: 60px;
-}
-

@@ -49,32 +49,3 @@
   font-family: 'Mosk', sans-serif;
 }
 
-/* Posiciones de imágenes para fondo2 */
-.imagen-producto {
-  position: absolute;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  z-index: 1;
-  /* Posición diferente para fondo2 */
-  top: 150px;
-  right: 30px;
-  width: 90px;
-  height: 90px;
-}
-
-/* Posiciones específicas por código para fondo2 */
-.imagen-producto[data-codigo="97"] {
-  top: 120px;
-  left: 30px;
-  width: 110px;
-  height: 110px;
-}
-
-.imagen-producto[data-codigo="230"] {
-  top: 180px;
-  right: 40px;
-  width: 70px;
-  height: 70px;
-}
-

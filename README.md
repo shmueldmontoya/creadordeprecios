@@ -37,8 +37,8 @@ Una aplicación web moderna y personalizable para generar rótulos de precios pa
 
 ```bash
 # Clonar el repositorio
-git clone <url-del-repositorio>
-cd creadordepreciosreact
+git clone https://github.com/shmueldmontoya/creadordeprecios.git
+cd creadordeprecios
 
 # Instalar dependencias
 npm install
@@ -46,8 +46,6 @@ npm install
 # Iniciar servidor de desarrollo
 npm run dev
 ```
-
-Visita `http://localhost:5173` en tu navegador.
 
 ### Build para Producción
 
@@ -62,33 +60,44 @@ npm run preview
 ## 📁 Estructura del Proyecto
 
 ```
-creadordepreciosreact/
+creadordeprecios/
 ├── src/
-│   ├── components/            # Componentes React
-│   │   ├── Header.jsx         # Header con nombre de tienda
+│   ├── components/            # Componentes React reutilizables
+│   │   ├── Header.jsx         # Encabezado con nombre de tienda
 │   │   ├── ProductForm.jsx    # Formulario de productos
 │   │   ├── LabelPreview.jsx   # Vista previa del rótulo
-│   │   ├── LabelQueue.jsx     # Cola de rótulos
-│   │   ├── EditLabelModal.jsx # Modal de edición
-│   │   └── Notification.jsx   # Sistema de notificaciones
+│   │   ├── LabelQueue.jsx     # Cola de rótulos para lote
+│   │   ├── EditLabelModal.jsx # Modal para editar rótulo
+│   │   ├── Notification.jsx   # Notificaciones
+│   │   └── HelpModal.jsx      # Ayuda y atajos
 │   ├── context/
-│   │   └── AppConfigContext.jsx # Configuración centralizada
+│   │   └── AppConfigContext.jsx # Configuración global de la app
 │   ├── hooks/
-│   │   └── useProductos.js    # Hook para productos
+│   │   └── useProductos.js    # Hook personalizado para productos
 │   ├── assets/
 │   │   ├── main.css           # Estilos principales
-│   │   └── validation.css     # Estilos de validación
-│   ├── App.jsx                # Componente principal
-│   └── main.jsx               # Punto de entrada
+│   │   └── validation.css     # Estilos de validación de formularios
+│   ├── App.jsx                # Componente principal de la app
+│   └── main.jsx               # Punto de entrada de React
 ├── public/
 │   ├── productos.json         # Base de datos de productos (estático)
-│   ├── fondo.css              # Diseño de fondo 1 (estático)
-│   ├── fondo2.css             # Diseño de fondo 2 (estático)
-│   ├── fondo3.css             # Diseño de fondo 3 (estático)
-│   └── fonts/                 # Fuentes personalizadas
+│   ├── fondo.css              # Fondo personalizado 1 (CSS)
+│   ├── fondo2.css             # Fondo personalizado 2 (CSS)
+│   ├── fondo3.css             # Fondo personalizado 3 (CSS)
+│   ├── favicon.ico            # Ícono del sitio
+│   ├── fonts/                 # Fuentes personalizadas (TTF)
+│   │   └── ...                # Archivos de fuentes
+│   └── herramientas/          # Herramientas adicionales
+│       ├── convertidor-imagenes.html   # Conversor de imágenes a Base64
+│       ├── generador-fondos.html       # Generador de CSS para fondos
+│       ├── README-herramientas.md      # Documentación de herramientas
+│       └── README-imagenes.md          # Guía para imágenes
 ├── index.html                 # HTML principal
-├── package.json               # Dependencias
+├── package.json               # Dependencias y scripts
+├── package-lock.json          # Lockfile de npm
 ├── vite.config.js             # Configuración de Vite
+├── eslint.config.js           # Configuración de ESLint
+├── LICENSE                    # Licencia MIT
 └── README.md                  # Documentación
 ```
 
@@ -338,12 +347,7 @@ En la carpeta `public/herramientas/` encontrarás utilidades web y documentació
 
 ### ¿Cómo acceder?
 
-Una vez desplegado, puedes abrir las herramientas desde:
-```
-https://<tu-dominio-netlify>/herramientas/convertidor-imagenes.html
-https://<tu-dominio-netlify>/herramientas/generador-fondos.html
-```
-O navegando a la carpeta `/herramientas/` en tu sitio.
+Puedes abrir las herramientas desde la carpeta `/herramientas/` en tu sitio o explorador.
 
 ## 🚀 Scripts Disponibles
 
@@ -386,7 +390,7 @@ Si tienes problemas o preguntas:
 ## 🔄 Changelog
 
 ### v3.0.0 - React + Vite
-- ⚛️ **Migración completa** a React 18+ con Vite
+- ⚛️ **Migración completa** a React 19+ con Vite
 - 🎯 **Componentes modulares** y reutilizables
 - 🚀 **Build optimizado** con Vite
 

@@ -1,77 +1,187 @@
-# 🏷️ Generador de Rótulos - Plantilla
+# 🏷️ Generador de Rótulos - React
 
-Una aplicación web moderna y personalizable para generar rótulos de precios para tiendas, supermercados y negocios, completamente configurable.
+Una aplicación web moderna y personalizable para generar rótulos de precios para tiendas, supermercados y negocios, completamente configurable. **Desarrollada con React y Vite** para mejor rendimiento y mantenibilidad.
 
-![Generador de Rótulos](https://img.shields.io/badge/Version-2.1.0-blue)
+![Generador de Rótulos](https://img.shields.io/badge/Version-3.0.0-blue)
+![React](https://img.shields.io/badge/React-19+-blue)
+![Vite](https://img.shields.io/badge/Vite-Latest-orange)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow)
 ![CSS3](https://img.shields.io/badge/CSS3-Latest-green)
-![HTML5](https://img.shields.io/badge/HTML5-Latest-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ## ✨ Características
 
+- ⚛️ **React 19+**: Arquitectura moderna y mantenible
+- 🚀 **Vite**: Desarrollo ultrarrápido y build optimizado
 - 🎨 **Diseños Personalizables**: Múltiples plantillas de fondo configurables
 - 📱 **Responsive Design**: Funciona perfectamente en desktop, tablet y móvil
 - 🌙 **Modo Oscuro**: Interfaz adaptable con tema claro/oscuro
 - ⚡ **Previsualización en Tiempo Real**: Ve los cambios instantáneamente
 - 📦 **Cola de Rótulos**: Procesa múltiples productos de una vez
-- 💾 **Descarga en Lote**: Exporta todos los rótulos en un archivo ZIP con nombre personalizable
+- 💾 **Descarga en Lote**: Exporta todos los rótulos en un archivo ZIP
 - 🔍 **Autocompletado**: Base de datos de productos integrada
 - ⌨️ **Atajos de Teclado**: Navegación rápida y eficiente
-- ✅ **Validaciones**: Sistema robusto de validación de datos
-- 💰 **Múltiples Monedas**: Soporte para diferentes divisas con separadores de miles configurables
-- 📏 **Unidades Flexibles**: Kilogramos, unidades, libras, etc.
+- ✅ **Validaciones Configurables**: Sistema robusto de validación
+- 💰 **Múltiples Monedas**: Soporte para diferentes divisas
+- 📏 **Unidades Flexibles**: Kilogramos, unidades, etc.
+- 💾 **Persistencia Local**: La cola se guarda automáticamente
+- 🎯 **Formato de Números**: Separadores de miles configurables
 
 ## 🚀 Instalación
 
-### ⚠️ IMPORTANTE: Servidor Local Requerido
+### Prerrequisitos
 
-**La aplicación NO funciona abriendo directamente el archivo `index.html`** debido a restricciones de seguridad del navegador que impiden cargar la base de datos de productos.
+- **Node.js 16+** y **npm** o **yarn**
 
-### Opción 1: Servidor Local (Recomendado)
+### Instalación Rápida
 
 ```bash
-# Con Python 3
-python -m http.server 8000
+# Clonar el repositorio
+git clone <url-del-repositorio>
+cd creadordepreciosreact
 
-# Con Node.js (npx)
-npx serve .
+# Instalar dependencias
+npm install
 
-# Con PHP
-php -S localhost:8000
+# Iniciar servidor de desarrollo
+npm run dev
 ```
 
-Luego visita `http://localhost:8000`
+Visita `http://localhost:5173` en tu navegador.
 
-### Opción 2: Servidor de Desarrollo
+### Build para Producción
 
-Si tienes Node.js instalado:
 ```bash
-npm install -g live-server
-live-server
+# Construir para producción
+npm run build
+
+# Previsualizar build
+npm run preview
 ```
 
-### Opción 3: Extensiones de VS Code
+## 📁 Estructura del Proyecto
 
-- **Live Server**: Instala la extensión y haz clic derecho en `index.html` → "Open with Live Server"
-- **Live Preview**: Extensión oficial de Microsoft para previsualización en vivo
+```
+creadordepreciosreact/
+├── src/
+│   ├── components/            # Componentes React
+│   │   ├── Header.jsx         # Header con nombre de tienda
+│   │   ├── ProductForm.jsx    # Formulario de productos
+│   │   ├── LabelPreview.jsx   # Vista previa del rótulo
+│   │   ├── LabelQueue.jsx     # Cola de rótulos
+│   │   ├── EditLabelModal.jsx # Modal de edición
+│   │   └── Notification.jsx   # Sistema de notificaciones
+│   ├── context/
+│   │   └── AppConfigContext.jsx # Configuración centralizada
+│   ├── hooks/
+│   │   └── useProductos.js    # Hook para productos
+│   ├── assets/
+│   │   ├── main.css           # Estilos principales
+│   │   ├── validation.css     # Estilos de validación
+│   │   ├── productos.json     # Base de datos de productos
+│   │   ├── fondo.css          # Diseño de fondo 1
+│   │   ├── fondo2.css         # Diseño de fondo 2
+│   │   └── fondo3.css         # Diseño de fondo 3
+│   ├── App.jsx                # Componente principal
+│   └── main.jsx               # Punto de entrada
+├── public/
+│   └── fonts/                 # Fuentes personalizadas
+├── index.html                 # HTML principal
+├── package.json               # Dependencias
+├── vite.config.js             # Configuración de Vite
+└── README.md                  # Documentación
+```
 
-## ⚙️ Configuración Rápida
+## ⚙️ Configuración
 
-### 1. Información de tu Tienda
+### Archivo de Configuración Principal
 
-Edita `js/config.js`:
+Edita `src/context/AppConfigContext.jsx`:
 
 ```javascript
-store: {
-  name: "Mi Supermercado",
-  currency: "$"              // Tu moneda
-}
+const APP_CONFIG = {
+  // ============================================================================
+  // CONFIGURACIÓN DE LA TIENDA
+  // ============================================================================
+  store: {
+    name: "Mi tienda",           // Nombre de tu tienda (se muestra en el header)
+    currency: "₡"                // Símbolo de moneda (₡, $, €, etc.)
+  },
+
+  // ============================================================================
+  // CONFIGURACIÓN DE RÓTULOS
+  // ============================================================================
+  labels: {
+    // Dimensiones del rótulo en píxeles
+    dimensions: {
+      width: 768,                // Ancho del rótulo
+      height: 993,               // Alto del rótulo
+      previewScale: 0.4          // Escala de la vista previa
+    },
+
+    // Fondo por defecto
+    defaultBackground: "fondo",
+
+    // Fondos disponibles para los rótulos
+    backgrounds: [
+      { 
+        id: "fondo",             // ID único del fondo
+        name: "Fondo #1",        // Nombre que se muestra en la interfaz
+        cssFile: "css/fondo.css" // Archivo CSS
+      }
+    ],
+
+    // Unidades de medida disponibles
+    units: [
+      { value: "kg", label: "Kilogramo" },
+      { value: "ud", label: "Unidad" },
+      { value: "", label: "No indicar" }
+    ],
+
+    // Textos personalizables
+    textoAhorro: "Ahorro:",              // Texto que aparece antes del monto ahorrado
+    textoPrecioAnterior: "Precio regular:" // Texto que aparece antes del precio anterior
+  },
+
+  // ============================================================================
+  // CONFIGURACIÓN DE PRODUCTOS
+  // ============================================================================
+  products: {
+    defaultUnit: "kg"              // Unidad por defecto para productos nuevos
+  },
+
+  // ============================================================================
+  // CONFIGURACIÓN DE EXPORTACIÓN
+  // ============================================================================
+  export: {
+    imageFormat: "png",          // Formato de imagen (png, jpg, webp)
+    individualPrefix: "rotulo_"  // Prefijo para archivos individuales
+  },
+
+  // ============================================================================
+  // CONFIGURACIÓN DE VALIDACIÓN
+  // ============================================================================
+  validation: {
+    requireProduct: true,        // ¿Es obligatorio el nombre del producto?
+    requireCurrentPrice: true,   // ¿Es obligatorio el precio actual?
+    requireCode: false,          // ¿Es obligatorio el código del producto?
+    minPrice: 0,                 // Precio mínimo permitido
+    maxPrice: 999999,            // Precio máximo permitido
+    maxProductLength: 50         // Longitud máxima del nombre del producto
+  },
+
+  // ============================================================================
+  // CONFIGURACIÓN DE FORMATO DE NÚMEROS
+  // ============================================================================
+  format: {
+    useThousandSeparator: true  // ¿Usar separadores de miles? (true = 12,345.67, false = 12345.67)
+  }
+};
 ```
 
-### 2. Base de Datos de Productos
+### Base de Datos de Productos
 
-Reemplaza `js/productos.json` con tus productos:
+Edita `src/assets/productos.json`:
 
 ```json
 [
@@ -86,45 +196,14 @@ Reemplaza `js/productos.json` con tus productos:
 ]
 ```
 
-### 3. Fondos Personalizados
-
-Crea tus propios diseños en `css/` y agrégalos a la configuración.
-
-## 📁 Estructura del Proyecto
-
-```
-creadordepreciosfinal-main/
-├── index.html              # Página principal
-├── js/
-│   ├── config.js           # Configuración centralizada
-│   ├── utils.js            # Utilidades y funciones comunes
-│   ├── validation.js       # Sistema de validación
-│   ├── templates.js        # Plantillas HTML dinámicas
-│   ├── main.js             # Lógica principal
-│   └── productos.json      # Base de datos de productos
-├── css/
-│   ├── main.css            # Estilos principales
-│   ├── validation.css      # Estilos de validación
-│   ├── fondo.css           # Diseño de fondo 1
-│   ├── fondo2.css          # Diseño de fondo 2
-│   └── fondo3.css          # Diseño de fondo 3
-├── herramientas/
-│   ├── generador-fondos.html # Herramienta para crear fondos
-│   └── README-herramientas.md # Documentación de herramientas
-├── recursos/
-│   └── fuentes/            # Fuentes personalizadas
-├── README.md               # Este archivo
-└── LICENSE                 # Licencia MIT
-```
-
 ## 🎯 Uso Básico
 
 1. **Ingresa los datos del producto**:
-   - Nombre del producto
+   - Nombre del producto (se autocompleta al escribir código)
    - Precio actual
    - Precio anterior (opcional)
    - Código de barras (opcional)
-   - Promoción (opcional)
+   - Promoción x cantidad (opcional)
 
 2. **Selecciona el diseño**:
    - Elige entre los fondos disponibles
@@ -134,7 +213,6 @@ creadordepreciosfinal-main/
    - Ve el resultado en tiempo real
    - Descarga la imagen individual
    - O agrega a la cola para procesar en lote
-   - Define el nombre del archivo ZIP antes de descargar el lote
 
 ## ⌨️ Atajos de Teclado
 
@@ -148,42 +226,25 @@ creadordepreciosfinal-main/
 
 ## 🎨 Personalización
 
-### 🛠️ Herramientas Incluidas
+### Fondos Personalizados
 
-#### Generador de Fondos
-- **Ubicación**: `herramientas/generador-fondos.html`
-- **Función**: Convierte imágenes PNG/JPG a CSS Base64 y ajusta posiciones de textos
-- **Uso**: Abre en tu navegador y sigue las instrucciones
+Los fondos son archivos CSS con imágenes convertidas a Base64. Para crear nuevos fondos:
 
-### 🖼️ Fondos Personalizados
+1. **Convierte tu imagen** a Base64
+2. **Crea un archivo CSS** con las posiciones de los textos
+3. **Agrega el fondo** a la configuración
 
-**IMPORTANTE**: Los fondos NO son imágenes PNG/JPG, sino **CSS con imágenes convertidas a Base64**.
-
-#### Opción 1: Usar el Generador de Fondos (Recomendado)
-
-1. **Abre** `herramientas/generador-fondos.html` en tu navegador
-2. **Sube** tu imagen (PNG, JPG, etc.)
-3. **Ajusta** las posiciones de los textos
-4. **Descarga** el archivo CSS generado
-5. **Coloca** el archivo en la carpeta `css/`
-6. **Agrega** el fondo a la configuración
-
-#### Opción 2: Crear Manualmente
-
-Crea un archivo CSS con tu imagen convertida a Base64:
-
+Ejemplo de archivo CSS:
 ```css
 .rotulo.mi-diseno {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...');
   background-size: cover;
   background-position: center;
-  color: white;
-  font-family: 'Arial', sans-serif;
 }
 
 .mi-diseno .producto {
   position: absolute;
-  top: 150px;  /* Posición específica */
+  top: 150px;
   left: 40px;
   right: 40px;
   font-size: 24px;
@@ -192,7 +253,7 @@ Crea un archivo CSS con tu imagen convertida a Base64:
 
 .mi-diseno .precio-actual {
   position: absolute;
-  top: 620px;  /* Posición específica */
+  top: 620px;
   left: 0;
   right: 0;
   text-align: center;
@@ -200,144 +261,81 @@ Crea un archivo CSS con tu imagen convertida a Base64:
 }
 ```
 
-**Nota**: Las posiciones de los textos están hardcodeadas para cada diseño. Si cambias la imagen, necesitarás ajustar las posiciones.
-
-#### Agregar a la Configuración
-
-```javascript
-backgrounds: [
-  {
-    id: "mi-diseno",
-    name: "Mi Diseño",
-    cssFile: "css/mi-diseno.css"
-  }
-]
-```
-
-### Monedas y Formatos
-
-```javascript
-store: {
-  currency: "€"        // Euro
-}
-
-// Configuración de formato de números
-format: {
-  useThousandSeparator: false, // Usar separadores de miles (comas)
-  thousandSeparator: ",",      // Separador de miles (coma, punto, espacio)
-  decimalSeparator: "."        // Separador decimal
-}
-```
-
-### Unidades de Medida
-
-```javascript
-units: [
-  { value: "kg", label: "Kilogramo" },
-  { value: "lb", label: "Libra" },
-  { value: "oz", label: "Onza" },
-  { value: "", label: "No indicar" }
-]
-```
-
 ### Formato de Números
 
 ```javascript
 format: {
-  useThousandSeparator: false, // true = ₡1,000, false = ₡1000
-  thousandSeparator: ",",      // Separador de miles (coma, punto, espacio)
-  decimalSeparator: "."        // Separador decimal
+  useThousandSeparator: true  // true = 12,345, false = 12345
 }
 ```
-
-**Ejemplos de configuración:**
-
-```javascript
-// Sin separadores (por defecto)
-format: { useThousandSeparator: false }
-// Resultado: ₡1000, ₡25000, ₡1000000
-
-// Con comas (estilo americano)
-format: { useThousandSeparator: true, thousandSeparator: "," }
-// Resultado: ₡1,000, ₡25,000, ₡1,000,000
-
-// Con puntos (estilo europeo)
-format: { useThousandSeparator: true, thousandSeparator: "." }
-// Resultado: ₡1.000, ₡25.000, ₡1.000.000
-
-// Con espacios
-format: { useThousandSeparator: true, thousandSeparator: " " }
-// Resultado: ₡1 000, ₡25 000, ₡1 000 000
-```
-
-**Para probar:** Cambia `useThousandSeparator: false` a `useThousandSeparator: true` en `js/config.js` y verás los separadores de miles en los precios.
-
-## ⚠️ Limitaciones Técnicas
-
-### Requisitos de Servidor
-- **La aplicación NO funciona** abriendo directamente `index.html`
-- **Requiere un servidor local** debido a restricciones de CORS del navegador
-- **Necesario para**: Cargar la base de datos de productos (`productos.json`)
-
-### Formato de Fondos
-- **NO soporta** imágenes PNG/JPG directamente como fondos
-- **Requiere** conversión a CSS Base64
-- **Razón**: Para funcionar sin dependencias externas y ser portable
-- **Solución**: Usa el generador de fondos incluido
-
-### Posicionamiento de Textos
-- **Las posiciones están hardcodeadas** para cada diseño específico
-- **Si cambias la imagen**, necesitas reajustar todas las posiciones
-- **Solución**: Usa el generador de fondos para ajustar posiciones visualmente
-
-## 🔧 Configuración Avanzada
 
 ### Validaciones
 
 ```javascript
 validation: {
-  requireProduct: true,        // Requerir nombre
+  requireProduct: true,        // Requerir nombre del producto
   requireCurrentPrice: true,   // Requerir precio actual
+  requireCode: false,          // Requerir código
   minPrice: 0,                 // Precio mínimo
-  maxPrice: 999999,           // Precio máximo
-  maxProductLength: 50        // Longitud máxima del nombre
+  maxPrice: 999999,            // Precio máximo
+  maxProductLength: 50         // Longitud máxima del nombre
 }
 ```
 
-### Exportación
+### Formato de Exportación
 
 ```javascript
 export: {
-  imageFormat: "png",          // Formato de imagen
-  imageQuality: 1,            // Calidad (0-1)
-  individualPrefix: "rotulo_"  // Prefijo para archivos individuales
+  imageFormat: "png",          // png, jpg, webp
+  individualPrefix: "rotulo_"  // Prefijo para archivos
 }
 ```
 
+## 🔧 Funcionalidades Técnicas
+
+### React Features
+- **Hooks**: useState, useEffect, useRef, useContext
+- **Context API**: Configuración global
+- **Componentes Modulares**: Reutilizables y mantenibles
+- **Event Handling**: Formularios controlados
+
+### Características Avanzadas
+- **LocalStorage**: Persistencia automática de la cola
+- **html2canvas**: Generación de imágenes
+- **JSZip**: Descarga en lote
+- **Font Awesome**: Iconos
+- **CSS Variables**: Temas claro/oscuro
+
+### Validaciones Inteligentes
+- **Validación en tiempo real**
+- **Mensajes de error personalizables**
+- **Reglas configurables**
+- **Validación de rangos de precios**
+
 ## 🌐 Compatibilidad
 
-- ✅ Chrome 60+
-- ✅ Firefox 55+
-- ✅ Safari 12+
-- ✅ Edge 79+
-- ✅ Opera 47+
+- ✅ Chrome 90+
+- ✅ Firefox 88+
+- ✅ Safari 14+
+- ✅ Edge 90+
+- ✅ Opera 76+
 
 ## 📱 Responsive Design
 
 La aplicación se adapta automáticamente a:
-
 - **Desktop**: 1200px+
 - **Tablet**: 768px - 1199px
 - **Móvil**: < 768px
 
-## 🚀 Funcionalidades Técnicas
+## 🚀 Scripts Disponibles
 
-- **Vanilla JavaScript**: Sin dependencias pesadas
-- **CSS Grid & Flexbox**: Layout moderno y flexible
-- **LocalStorage**: Persistencia de datos local
-- **Canvas API**: Generación de imágenes
-- **File API**: Descarga de archivos
-- **ES6+**: Sintaxis moderna de JavaScript
+```bash
+# Desarrollo
+npm run dev          # Servidor de desarrollo
+npm run build        # Build para producción
+npm run preview      # Previsualizar build
+npm run lint         # Linting del código
+```
 
 ## 🤝 Contribuir
 
@@ -353,20 +351,26 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 
 ## 🙏 Agradecimientos
 
+- [React](https://reactjs.org/) - Biblioteca de UI
+- [Vite](https://vitejs.dev/) - Build tool
 - [html2canvas](https://html2canvas.hertzen.com/) - Generación de imágenes
 - [JSZip](https://stuk.github.io/jszip/) - Archivos ZIP
 - [Font Awesome](https://fontawesome.com/) - Iconos
-- [Google Fonts](https://fonts.google.com/) - Tipografías
 
 ## 📞 Soporte
 
 Si tienes problemas o preguntas:
 
-1. Revisa la sección de personalización en este README
+1. Revisa la configuración en `AppConfigContext.jsx`
 2. Verifica la consola del navegador para errores
-3. Asegúrate de que todos los archivos estén en las rutas correctas
+3. Asegúrate de que todas las dependencias estén instaladas
 
 ## 🔄 Changelog
+
+### v3.0.0 - React + Vite
+- ⚛️ **Migración completa** a React 18+ con Vite
+- 🎯 **Componentes modulares** y reutilizables
+- 🚀 **Build optimizado** con Vite
 
 ### v2.1.0
 - 🔧 Corrección de bugs y mejoras significativas del código
@@ -382,7 +386,3 @@ Si tienes problemas o preguntas:
 - 🎉 Lanzamiento inicial
 - 📦 Funcionalidades básicas
 - 🎨 Un diseño de fondo
-
----
-
-**¡Haz que tu tienda se vea profesional con rótulos de calidad!** 🏪✨

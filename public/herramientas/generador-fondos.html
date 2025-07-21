@@ -263,20 +263,22 @@
     <div class="container">
         <div class="header">
             <h1>🖼️ Generador de Fondos</h1>
-            <p>Convierte tus imágenes a CSS Base64 y ajusta las posiciones de los textos</p>
+            <p>Genera el CSS para tu fondo personalizado usando una imagen real ubicada en la carpeta <code>public/</code></p>
         </div>
 
         <div class="instructions">
             <h3>📋 Instrucciones de Uso</h3>
             <ol>
-                <li><strong>Sube tu imagen</strong> (PNG, JPG, etc.) - se convertirá automáticamente a Base64</li>
+                <li><strong>Coloca tu imagen</strong> (PNG, JPG, etc.) en la carpeta <code>public/</code> del proyecto. Ejemplo: <code>fondo4.png</code></li>
+                <li><strong>Escribe el nombre del archivo de imagen</strong> en el campo correspondiente (ejemplo: <code>fondo4.png</code>)</li>
                 <li><strong>Ajusta las posiciones</strong> arrastrando los textos en la previsualización</li>
                 <li><strong>Personaliza los estilos</strong> (colores, fuentes, etc.)</li>
-                <li><strong>Descarga el CSS</strong> y colócalo en la carpeta <code>css/</code></li>
-                <li><strong>Agrega el fondo</strong> a la configuración en <code>js/config.js</code></li>
+                <li><strong>Genera el CSS</strong> y descárgalo</li>
+                <li><strong>Coloca el archivo CSS</strong> generado en la carpeta <code>public/</code></li>
+                <li><strong>Agrega el fondo</strong> a la configuración en <code>AppConfigContext.jsx</code> si es necesario</li>
             </ol>
             <div style="margin-top: 15px; padding: 10px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px;">
-                <strong>💡 Nota:</strong> Las imágenes con ancho mayor a 768px se redimensionarán automáticamente manteniendo la proporción para optimizar el tamaño del archivo CSS.
+                <strong>💡 Nota:</strong> Se recomienda que la imagen tenga un tamaño de 768px de ancho x 993px de alto (o mayor, pero conservando la relación de aspecto).
             </div>
         </div>
 
@@ -285,7 +287,7 @@
                 <h2>⚙️ Configuración</h2>
                 
                 <div class="form-group">
-                    <label for="fondoId">ID del Fondo:</label>
+                    <label for="fondoId">ID del Fondo: <span style="font-size:12px;color:#888;">(Identificador único, sin espacios. Ejemplo: <code>navidad2024</code>)</span></label>
                     <input type="text" id="fondoId" placeholder="mi-fondo" value="mi-fondo">
                 </div>
 
@@ -295,13 +297,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="imagenInput">Imagen de Fondo:</label>
-                    <div class="file-input-wrapper">
-                        <input type="file" id="imagenInput" accept="image/*">
-                        <label for="imagenInput" class="file-input-label" id="fileLabel">
-                            📁 Haz clic para seleccionar una imagen
-                        </label>
-                    </div>
+                    <label for="nombreImagen">Nombre del archivo de imagen (en public/):</label>
+                    <input type="text" id="nombreImagen" placeholder="fondo4.png" value="fondo4.png">
+                </div>
+                <div class="form-group">
+                    <label for="previewLocalImage">(Opcional) Cargar imagen local solo para previsualización:</label>
+                    <input type="file" id="previewLocalImage" accept="image/*">
+                    <small style="color:#888;">Esto no afecta el CSS generado, solo la vista previa.</small>
                 </div>
 
                 <div class="form-group">
@@ -379,62 +381,34 @@
     </div>
 
     <script>
-        let imagenBase64 = '';
         let elementosArrastrables = [];
 
         // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
             inicializarArrastre();
             configurarEventos();
-        });
-
-        function configurarEventos() {
-            // Evento para subir imagen
-            document.getElementById('imagenInput').addEventListener('change', function(e) {
+            // Agregar lógica para mostrar la imagen local en la previsualización si se selecciona, pero sin modificar el CSS generado
+            document.getElementById('previewLocalImage').addEventListener('change', function(e) {
                 const file = e.target.files[0];
                 if (file) {
                     const reader = new FileReader();
-                    reader.onload = function(e) {
-                        // Crear imagen para obtener dimensiones
-                        const img = new Image();
-                        img.onload = function() {
-                            const maxWidth = 768;
-                            let mensaje = `✅ ${file.name}`;
-                            
-                            // Verificar si necesita redimensionamiento
-                            if (img.width > maxWidth) {
-                                const canvas = document.createElement('canvas');
-                                const ctx = canvas.getContext('2d');
-                                
-                                // Calcular nueva altura manteniendo proporción
-                                const ratio = img.height / img.width;
-                                const newWidth = maxWidth;
-                                const newHeight = Math.round(maxWidth * ratio);
-                                
-                                canvas.width = newWidth;
-                                canvas.height = newHeight;
-                                
-                                // Dibujar imagen redimensionada
-                                ctx.drawImage(img, 0, 0, newWidth, newHeight);
-                                
-                                // Convertir a Base64
-                                imagenBase64 = canvas.toDataURL('image/jpeg', 0.8);
-                                
-                                mensaje += ` (redimensionada de ${img.width}x${img.height} a ${newWidth}x${newHeight})`;
-                            } else {
-                                imagenBase64 = e.target.result;
-                            }
-                            
-                            document.getElementById('previewRotulo').style.backgroundImage = `url(${imagenBase64})`;
-                            document.getElementById('fileLabel').textContent = mensaje;
-                            document.getElementById('fileLabel').classList.add('has-file');
-                        };
-                        img.src = e.target.result;
+                    reader.onload = function(ev) {
+                        document.getElementById('previewRotulo').style.backgroundImage = `url(${ev.target.result})`;
                     };
                     reader.readAsDataURL(file);
                 }
             });
+            // Si el usuario borra la selección, restaurar la previsualización usando el nombre de la imagen indicada
+            document.getElementById('previewLocalImage').addEventListener('input', function() {
+                if (!this.files.length) {
+                    // Si el usuario borra la selección, restaurar la previsualización usando el nombre de la imagen indicada
+                    const nombreImagen = document.getElementById('nombreImagen').value || 'fondo.png';
+                    document.getElementById('previewRotulo').style.backgroundImage = `url('/${nombreImagen}')`;
+                }
+            });
+        });
 
+        function configurarEventos() {
             // Eventos para cambios en tiempo real
             document.getElementById('colorProducto').addEventListener('change', actualizarPrevisualizacion);
             document.getElementById('colorPrecio').addEventListener('change', actualizarPrevisualizacion);
@@ -504,6 +478,7 @@
 
         function generarCSS() {
             const fondoId = document.getElementById('fondoId').value || 'mi-fondo';
+            const nombreImagen = document.getElementById('nombreImagen').value || 'fondo.png';
             const colorProducto = document.getElementById('colorProducto').value;
             const colorPrecio = document.getElementById('colorPrecio').value;
             const colorAntes = document.getElementById('colorAntes').value;
@@ -515,11 +490,9 @@
             css += `   ============================================================================ */\n\n`;
             
             css += `.rotulo {\n`;
-            if (imagenBase64) {
-                css += `  background-image: url('${imagenBase64}');\n`;
-                css += `  background-size: cover;\n`;
-                css += `  background-position: center;\n`;
-            }
+            css += `  background-image: url('/${nombreImagen}');\n`;
+            css += `  background-size: cover;\n`;
+            css += `  background-position: center;\n`;
             css += `  font-family: ${fuente};\n`;
             css += `}\n\n`;
             
@@ -577,12 +550,8 @@
         }
 
         function limpiarTodo() {
-            document.getElementById('imagenInput').value = '';
-            document.getElementById('fileLabel').textContent = '📁 Haz clic para seleccionar una imagen';
-            document.getElementById('fileLabel').classList.remove('has-file');
-            document.getElementById('previewRotulo').style.backgroundImage = '';
+            document.getElementById('nombreImagen').value = 'fondo4.png'; // Resetear el nombre de la imagen
             document.getElementById('cssOutput').textContent = '// El CSS aparecerá aquí después de generar...';
-            imagenBase64 = '';
             
             // Resetear colores
             document.getElementById('colorProducto').value = '#ffffff';

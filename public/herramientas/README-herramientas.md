@@ -5,51 +5,48 @@ Este directorio contiene herramientas adicionales para facilitar la personalizac
 ## 📁 Contenido
 
 ### `generador-fondos.html`
-**Herramienta principal para crear fondos personalizados**
+**Herramienta principal para crear archivos CSS de fondos personalizados**
 
-#### ¿Qué hace?
-- Convierte imágenes PNG/JPG a formato CSS Base64
+#### ¿Qué hace ahora?
 - Permite ajustar visualmente las posiciones de los textos
-- Genera automáticamente el código CSS necesario
+- Genera automáticamente el código CSS necesario para el fondo
 - Facilita la creación de nuevos diseños
 
-#### ¿Por qué es necesario?
-La aplicación no puede usar imágenes PNG/JPG directamente como fondos debido a:
-- Restricciones de seguridad del navegador
-- Necesidad de ser portable (sin dependencias externas)
-- Optimización para funcionar offline
-
-#### Cómo usar:
-
-1. **Abre** `herramientas/generador-fondos.html` en tu navegador
-2. **Sube** tu imagen de fondo (PNG, JPG, etc.)
-3. **Configura**:
-   - ID del fondo (ej: "mi-supermercado")
+#### ¿Cómo se usa ahora?
+1. **Coloca tu imagen de fondo** (PNG/JPG) manualmente en la carpeta `public/` del proyecto. El nombre del archivo debe ser representativo, por ejemplo: `fondo4.png`.
+2. **Abre** `herramientas/generador-fondos.html` en tu navegador
+3. **Escribe el nombre del archivo de imagen** (ejemplo: `fondo4.png`)
+4. **Escribe el ID del fondo** (ejemplo: `navidad2024`). Este identificador será el nombre del archivo CSS y la referencia en la app.
+5. **Configura**:
    - Nombre del fondo (ej: "Diseño Supermercado")
    - Color del texto
    - Fuente
-4. **Ajusta posiciones**:
+6. **Ajusta posiciones**:
    - Arrastra los textos en la previsualización
    - Los cambios se reflejan en tiempo real
-5. **Genera CSS**:
+7. **Genera CSS**:
    - Haz clic en "Generar CSS"
    - Revisa el código generado
-6. **Descarga**:
+8. **Descarga**:
    - Haz clic en "Descargar CSS"
    - El archivo se guardará como `[id-del-fondo].css`
-7. **Instala**:
-   - Coloca el archivo en la carpeta `css/`
-   - Agrega el fondo a la configuración en `js/config.js`
+9. **Instala**:
+   - Coloca el archivo CSS en la carpeta `public/`
+   - Agrega el fondo a la configuración en `AppConfigContext.jsx` si es necesario
+
+#### Recomendaciones de imagen
+- **Tamaño recomendado:** 768px de ancho x 993px de alto (o mayor, pero conservando la relación de aspecto)
+- **Formato:** PNG o JPG
+- **Nombre:** Usa nombres descriptivos y sin espacios
 
 #### Ejemplo de configuración:
-
 ```javascript
-// En js/config.js
+// En AppConfigContext.jsx
 backgrounds: [
   {
     id: "mi-supermercado",
     name: "Diseño Supermercado",
-    cssFile: "css/mi-supermercado.css"
+    cssFile: "fondo4.css"
   }
 ]
 ```
@@ -83,6 +80,7 @@ backgrounds: [
 - Verifica que el formato sea PNG, JPG, JPEG, GIF
 - Asegúrate de que el archivo no esté corrupto
 - Intenta con una imagen más pequeña
+- Verifica que el nombre del archivo en el CSS coincida exactamente con el archivo en la carpeta public
 
 ### Los textos no se posicionan correctamente
 - Usa la previsualización para ajustar las posiciones
@@ -95,11 +93,6 @@ backgrounds: [
 - Revisa la consola del navegador para errores
 
 ## 📝 Notas Técnicas
-
-### Formato Base64
-- Las imágenes se convierten automáticamente a Base64
-- Esto aumenta el tamaño del archivo CSS
-- Recomendado: Optimiza las imágenes antes de subirlas
 
 ### Posicionamiento Absoluto
 - Los textos usan posicionamiento absoluto
@@ -114,3 +107,8 @@ backgrounds: [
 ---
 
 **¡Con estas herramientas podrás crear diseños profesionales para tu tienda!** 🎨✨ 
+
+#### Preguntas frecuentes
+
+**¿Por qué debo poner un ID único para cada fondo?**
+El ID permite que la aplicación distinga entre diferentes diseños de fondo y los muestre correctamente. Si dos fondos tienen el mismo ID, pueden sobrescribirse o causar errores. 

@@ -2,6 +2,8 @@
 
 Una aplicación web moderna y personalizable para generar rótulos de precios para tiendas, supermercados y negocios, completamente configurable. **Desarrollada con React y Vite** para mejor rendimiento y mantenibilidad.
 
+> **Nota:** Esta versión utiliza imágenes reales (archivos PNG/JPG) para los fondos, a diferencia de la versión JS Vanilla que usaba cadenas de texto base64 por restricciones de CORS del navegador.
+
 ![Generador de Rótulos](https://img.shields.io/badge/Version-3.0.0-blue)
 ![React](https://img.shields.io/badge/React-19+-blue)
 ![Vite](https://img.shields.io/badge/Vite-Latest-orange)
@@ -59,151 +61,17 @@ npm run preview
 
 ## 📁 Estructura del Proyecto
 
-```
-creadordeprecios/
-├── src/
-│   ├── components/            # Componentes React reutilizables
-│   │   ├── Header.jsx         # Encabezado con nombre de tienda
-│   │   ├── ProductForm.jsx    # Formulario de productos
-│   │   ├── LabelPreview.jsx   # Vista previa del rótulo
-│   │   ├── LabelQueue.jsx     # Cola de rótulos para lote
-│   │   ├── EditLabelModal.jsx # Modal para editar rótulo
-│   │   ├── Notification.jsx   # Notificaciones
-│   │   └── HelpModal.jsx      # Ayuda y atajos
-│   ├── context/
-│   │   └── AppConfigContext.jsx # Configuración global de la app
-│   ├── hooks/
-│   │   └── useProductos.js    # Hook personalizado para productos
-│   ├── assets/
-│   │   ├── main.css           # Estilos principales
-│   │   └── validation.css     # Estilos de validación de formularios
-│   ├── App.jsx                # Componente principal de la app
-│   └── main.jsx               # Punto de entrada de React
-├── public/
-│   ├── productos.json         # Base de datos de productos (estático)
-│   ├── fondo.css              # Fondo personalizado 1 (CSS)
-│   ├── fondo2.css             # Fondo personalizado 2 (CSS)
-│   ├── fondo3.css             # Fondo personalizado 3 (CSS)
-│   ├── favicon.ico            # Ícono del sitio
-│   ├── fonts/                 # Fuentes personalizadas (TTF)
-│   │   └── ...                # Archivos de fuentes
-│   └── herramientas/          # Herramientas adicionales
-│       ├── convertidor-imagenes.html   # Conversor de imágenes a Base64
-│       ├── generador-fondos.html       # Generador de CSS para fondos
-│       ├── README-herramientas.md      # Documentación de herramientas
-│       └── README-imagenes.md          # Guía para imágenes
-├── index.html                 # HTML principal
-├── package.json               # Dependencias y scripts
-├── package-lock.json          # Lockfile de npm
-├── vite.config.js             # Configuración de Vite
-├── eslint.config.js           # Configuración de ESLint
-├── LICENSE                    # Licencia MIT
-└── README.md                  # Documentación
-```
+(Ver estructura de carpetas en el explorador del proyecto o en la documentación de herramientas para más detalles)
 
 ## ⚙️ Configuración
 
-### Archivo de Configuración Principal
+La configuración principal se encuentra en `src/context/AppConfigContext.jsx`. Allí puedes personalizar los datos de la tienda, los fondos disponibles, las unidades, textos y validaciones.
 
-Edita `src/context/AppConfigContext.jsx`:
-
-```javascript
-const APP_CONFIG = {
-  // ============================================================================
-  // CONFIGURACIÓN DE LA TIENDA
-  // ============================================================================
-  store: {
-    name: "Mi tienda",           // Nombre de tu tienda (se muestra en el header)
-    currency: "₡"                // Símbolo de moneda (₡, $, €, etc.)
-  },
-
-  // ============================================================================
-  // CONFIGURACIÓN DE RÓTULOS
-  // ============================================================================
-  labels: {
-    // Dimensiones del rótulo en píxeles
-    dimensions: {
-      width: 768,                // Ancho del rótulo
-      height: 993,               // Alto del rótulo
-      previewScale: 0.4          // Escala de la vista previa
-    },
-
-    // Fondo por defecto
-    defaultBackground: "fondo",
-
-    // Fondos disponibles para los rótulos
-    backgrounds: [
-      { 
-        id: "fondo",             // ID único del fondo
-        name: "Fondo #1",        // Nombre que se muestra en la interfaz
-        cssFile: "css/fondo.css" // Archivo CSS
-      }
-    ],
-
-    // Unidades de medida disponibles
-    units: [
-      { value: "kg", label: "Kilogramo" },
-      { value: "ud", label: "Unidad" },
-      { value: "", label: "No indicar" }
-    ],
-
-    // Textos personalizables
-    textoAhorro: "Ahorro:",              // Texto que aparece antes del monto ahorrado
-    textoPrecioAnterior: "Precio regular:" // Texto que aparece antes del precio anterior
-  },
-
-  // ============================================================================
-  // CONFIGURACIÓN DE PRODUCTOS
-  // ============================================================================
-  products: {
-    defaultUnit: "kg"              // Unidad por defecto para productos nuevos
-  },
-
-  // ============================================================================
-  // CONFIGURACIÓN DE EXPORTACIÓN
-  // ============================================================================
-  export: {
-    imageFormat: "png",          // Formato de imagen (png, jpg, webp)
-    individualPrefix: "rotulo_"  // Prefijo para archivos individuales
-  },
-
-  // ============================================================================
-  // CONFIGURACIÓN DE VALIDACIÓN
-  // ============================================================================
-  validation: {
-    requireProduct: true,        // ¿Es obligatorio el nombre del producto?
-    requireCurrentPrice: true,   // ¿Es obligatorio el precio actual?
-    requireCode: false,          // ¿Es obligatorio el código del producto?
-    minPrice: 0,                 // Precio mínimo permitido
-    maxPrice: 999999,            // Precio máximo permitido
-    maxProductLength: 50         // Longitud máxima del nombre del producto
-  },
-
-  // ============================================================================
-  // CONFIGURACIÓN DE FORMATO DE NÚMEROS
-  // ============================================================================
-  format: {
-    useThousandSeparator: true  // ¿Usar separadores de miles? (true = 12,345.67, false = 12345.67)
-  }
-};
-```
-
-### Base de Datos de Productos
-
-Edita `public/productos.json`:
-
-```json
-[
-  {
-    "codigos": ["001"],
-    "nombre": "Manzana Roja"
-  },
-  {
-    "codigos": ["002"],
-    "nombre": "Plátano"
-  }
-]
-```
+Para agregar un fondo personalizado:
+1. Coloca la imagen en la carpeta `public/` (ejemplo: `fondo4.png`).
+2. Usa la herramienta `public/herramientas/generador-fondos.html` para generar el archivo CSS, ajustando posiciones y estilos.
+3. Descarga el CSS generado y colócalo en `public/`.
+4. Agrega el fondo a la lista en `AppConfigContext.jsx` con un ID único, nombre y el nombre del archivo CSS.
 
 ## 🎯 Uso Básico
 
@@ -237,38 +105,9 @@ Edita `public/productos.json`:
 
 ### Fondos Personalizados
 
-Los fondos son archivos CSS (por ejemplo, `public/fondo.css`) con imágenes convertidas a Base64. Para crear nuevos fondos:
+Los fondos se gestionan con archivos CSS y una imagen en la carpeta `public/`. Usa la herramienta de generación de fondos para crear nuevos diseños fácilmente, sin necesidad de convertir imágenes a base64 como se hacía con la versión de JavaScript Vanilla debido restricciones de CORS del navegador.
 
-1. **Convierte tu imagen** a Base64
-2. **Crea un archivo CSS** en la carpeta `public/` con las posiciones de los textos
-3. **Agrega el fondo** a la configuración
-
-Ejemplo de archivo CSS en `public/`:
-```css
-.rotulo.mi-diseno {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...');
-  background-size: cover;
-  background-position: center;
-}
-
-.mi-diseno .producto {
-  position: absolute;
-  top: 150px;
-  left: 40px;
-  right: 40px;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.mi-diseno .precio-actual {
-  position: absolute;
-  top: 620px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-size: 110px;
-}
-```
+Consulta la documentación en `public/herramientas/README-herramientas.md` para el flujo actualizado y recomendaciones de uso.
 
 ### Formato de Números
 
@@ -341,9 +180,8 @@ La aplicación se adapta automáticamente a:
 En la carpeta `public/herramientas/` encontrarás utilidades web y documentación extra para facilitar la personalización y el uso de la aplicación. Estas herramientas son accesibles directamente desde el navegador una vez desplegado el proyecto.
 
 ### ¿Qué contiene?
-- `convertidor-imagenes.html`: Conversor para transformar imágenes a Base64, útil para crear nuevos fondos personalizados.
 - `generador-fondos.html`: Herramienta para generar archivos CSS de fondos personalizados.
-- `README-imagenes.md` y `README-herramientas.md`: Documentación y guías de uso para las herramientas.
+- `README-herramientas.md`: Documentación y guías de uso para las herramientas.
 
 ### ¿Cómo acceder?
 

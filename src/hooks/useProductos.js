@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 export default function useProductos() {
   const [productos, setProductos] = useState([]);
   useEffect(() => {
-    fetch("/src/assets/productos.json")
+    fetch("/productos.json")
       .then(res => res.json())
       .then(data => setProductos(data))
       .catch(() => setProductos([]));

@@ -77,14 +77,14 @@ creadordepreciosreact/
 │   │   └── useProductos.js    # Hook para productos
 │   ├── assets/
 │   │   ├── main.css           # Estilos principales
-│   │   ├── validation.css     # Estilos de validación
-│   │   ├── productos.json     # Base de datos de productos
-│   │   ├── fondo.css          # Diseño de fondo 1
-│   │   ├── fondo2.css         # Diseño de fondo 2
-│   │   └── fondo3.css         # Diseño de fondo 3
+│   │   └── validation.css     # Estilos de validación
 │   ├── App.jsx                # Componente principal
 │   └── main.jsx               # Punto de entrada
 ├── public/
+│   ├── productos.json         # Base de datos de productos (estático)
+│   ├── fondo.css              # Diseño de fondo 1 (estático)
+│   ├── fondo2.css             # Diseño de fondo 2 (estático)
+│   ├── fondo3.css             # Diseño de fondo 3 (estático)
 │   └── fonts/                 # Fuentes personalizadas
 ├── index.html                 # HTML principal
 ├── package.json               # Dependencias
@@ -181,7 +181,7 @@ const APP_CONFIG = {
 
 ### Base de Datos de Productos
 
-Edita `src/assets/productos.json`:
+Edita `public/productos.json`:
 
 ```json
 [
@@ -228,13 +228,13 @@ Edita `src/assets/productos.json`:
 
 ### Fondos Personalizados
 
-Los fondos son archivos CSS con imágenes convertidas a Base64. Para crear nuevos fondos:
+Los fondos son archivos CSS (por ejemplo, `public/fondo.css`) con imágenes convertidas a Base64. Para crear nuevos fondos:
 
 1. **Convierte tu imagen** a Base64
-2. **Crea un archivo CSS** con las posiciones de los textos
+2. **Crea un archivo CSS** en la carpeta `public/` con las posiciones de los textos
 3. **Agrega el fondo** a la configuración
 
-Ejemplo de archivo CSS:
+Ejemplo de archivo CSS en `public/`:
 ```css
 .rotulo.mi-diseno {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...');

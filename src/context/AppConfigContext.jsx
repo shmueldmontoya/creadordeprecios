@@ -39,17 +39,17 @@ const APP_CONFIG = {
       { 
         id: "fondo",             // ID único del fondo
         name: "Fondo #1",        // Nombre que se muestra en la interfaz
-        cssFile: "css/fondo.css" // Archivo CSS (ruta relativa a /src/assets/)
+        cssFile: "fondo.css" // Archivo CSS (ahora en public)
       },
       { 
         id: "fondo2", 
         name: "Fondo #2", 
-        cssFile: "css/fondo2.css" 
+        cssFile: "fondo2.css" 
       },
       { 
         id: "fondo3", 
         name: "Fondo #3", 
-        cssFile: "css/fondo3.css" 
+        cssFile: "fondo3.css" 
       }
     ],
 

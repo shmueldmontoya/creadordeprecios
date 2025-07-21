@@ -394,7 +394,7 @@ function App() {
         link.id = 'estiloFondo';
         document.head.appendChild(link);
       }
-      link.href = `/src/assets/${fondoConfig.cssFile.replace('css/', '')}`;
+      link.href = `/${fondoConfig.cssFile.replace('css/', '')}`;
     }
     // Limpieza opcional: no removemos el link para mantener el fondo
   }, [form.fondo, labels.backgrounds]);

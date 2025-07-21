@@ -340,10 +340,10 @@ En la carpeta `public/herramientas/` encontrarás utilidades web y documentació
 
 Una vez desplegado, puedes abrir las herramientas desde:
 ```
-https://<tu-dominio-netlify>/herramientas/convertidor-imagenes.html
-https://<tu-dominio-netlify>/herramientas/generador-fondos.html
+https://<tu-dominio>/herramientas/convertidor-imagenes.html
+https://<tu-dominio>/herramientas/generador-fondos.html
 ```
-O navegando a la carpeta `/herramientas/` en tu sitio.
+O navegando a la carpeta `/herramientas/` en tu sitio o explorador de archivos 
 
 ## 🚀 Scripts Disponibles
 

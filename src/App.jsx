@@ -11,6 +11,7 @@ import html2canvas from "html2canvas";
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
 import useProductos from "./hooks/useProductos";
+import Footer from "./components/Footer";
 
 function App() {
   const { labels, store, format, products, export: exportConfig, validation } = useAppConfig();
@@ -431,6 +432,7 @@ function App() {
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
+      <Footer />
       <EditLabelModal
         open={editIdx !== null}
         data={editData || {}}

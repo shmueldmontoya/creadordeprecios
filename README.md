@@ -327,6 +327,24 @@ La aplicación se adapta automáticamente a:
 - **Tablet**: 768px - 1199px
 - **Móvil**: < 768px
 
+## 🛠️ Herramientas adicionales
+
+En la carpeta `public/herramientas/` encontrarás utilidades web y documentación extra para facilitar la personalización y el uso de la aplicación. Estas herramientas son accesibles directamente desde el navegador una vez desplegado el proyecto.
+
+### ¿Qué contiene?
+- `convertidor-imagenes.html`: Conversor para transformar imágenes a Base64, útil para crear nuevos fondos personalizados.
+- `generador-fondos.html`: Herramienta para generar archivos CSS de fondos personalizados.
+- `README-imagenes.md` y `README-herramientas.md`: Documentación y guías de uso para las herramientas.
+
+### ¿Cómo acceder?
+
+Una vez desplegado, puedes abrir las herramientas desde:
+```
+https://<tu-dominio-netlify>/herramientas/convertidor-imagenes.html
+https://<tu-dominio-netlify>/herramientas/generador-fondos.html
+```
+O navegando a la carpeta `/herramientas/` en tu sitio.
+
 ## 🚀 Scripts Disponibles
 
 ```bash

@@ -317,9 +317,36 @@ function App() {
     setEditData(null);
   };
 
+  // Utilidad para cargar todos los CSS de fondos
+  const ensureAllBackgroundCSSLoaded = async () => {
+    const promises = labels.backgrounds.map(bg => {
+      return new Promise(resolve => {
+        let link = document.getElementById('estiloFondo-' + bg.id);
+        if (!link) {
+          link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.id = 'estiloFondo-' + bg.id;
+          link.href = `/${bg.cssFile.replace('css/', '')}`;
+          link.onload = () => resolve();
+          document.head.appendChild(link);
+        } else {
+          resolve();
+        }
+      });
+    });
+    await Promise.all(promises);
+  };
+
   const handleDownloadAll = async () => {
     if (queue.length === 0) return;
     const zip = new JSZip();
+    // Mapeo dinámico fondo -> imagen
+    const fondoToImage = {};
+    labels.backgrounds.forEach(bg => {
+      // Obtener el nombre base del archivo CSS y cambiar la extensión a .png
+      const base = bg.cssFile.replace(/\.css$/, "");
+      fondoToImage[bg.id] = `/${base}.png`;
+    });
     for (let i = 0; i < queue.length; i++) {
       const item = queue[i];
       // Renderizar el rótulo en un contenedor oculto
@@ -335,7 +362,9 @@ function App() {
         const diff = Number(item.anterior) - Number(item.actual);
         ahorro = `${store.currency}${formatNumber(diff)}`;
       }
-      temp.innerHTML = `<div class='rotulo rotulo-preview ${item.fondo}' id='rotulo-temp'>
+      // Obtener la imagen de fondo correspondiente
+      const fondoImg = fondoToImage[item.fondo] || fondoToImage[labels.defaultBackground] || '/fondo.png';
+      temp.innerHTML = `<div class='rotulo rotulo-preview ${item.fondo}' id='rotulo-temp' style="background-image:url('${fondoImg}');background-size:cover;background-position:center;">
         <div class='producto' id='texto-producto'>${item.producto}</div>
         <div class='precio-actual' id='texto-actual'>
           ${item.promo && item.promo > 0 ? `<span class='promo' id='texto-promo'>${item.promo}x&nbsp;</span>` : ''}${store.currency}${formatNumber(item.actual)}${item.unidad ? ` <span class='unidad'>/ ${item.unidad}</span>` : ""}

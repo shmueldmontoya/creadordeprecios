@@ -3,19 +3,22 @@ import { useAppConfig } from "../context/AppConfigContext";
 
 const Header = ({ onHelp, onToggleTheme }) => {
   const { store } = useAppConfig();
-  
+  // Detectar si es móvil
+  const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
   return (
     <header>
       <h1 id="tituloApp">Generador de Rótulos - {store.name}</h1>
       <div className="header-buttons">
-        <button
-          id="botonAyuda"
-          className="boton-ayuda"
-          title="Atajos de teclado (F1)"
-          onClick={onHelp}
-        >
-          <i className="fas fa-question-circle"></i>
-        </button>
+        {!isMobile && (
+          <button
+            id="botonAyuda"
+            className="boton-ayuda"
+            title="Atajos de teclado (F1)"
+            onClick={onHelp}
+          >
+            <i className="fas fa-question-circle"></i>
+          </button>
+        )}
         <button
           id="botonModoOscuro"
           className="boton-modo-oscuro"

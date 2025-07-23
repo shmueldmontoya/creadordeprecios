@@ -149,7 +149,7 @@ header h1 {
   }
   
   header h1 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-right: 75px; /* Más espacio para los botones */
   }
   
@@ -249,10 +249,20 @@ label {
   color: #ffffff;
 }
 .botones-formulario {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin: 10px;
+}
+@media (max-width: 440px) {
+  .botones-formulario {
+    flex-direction: column;
+  }
 }
 
 .botonDescargarRotulo, .botonAgregarCola {
+  width: 145px;
+  text-align: center;
   margin: 4px;
 }
 
@@ -1278,4 +1288,42 @@ input[type=number] { /* Para Firefox */
 .modal-editar-scroll {
   scrollbar-width: thin;
   scrollbar-color: var(--color-borde) var(--color-fondo-card);
+}
+
+/* ================= ESTILOS DEL FOOTER =================== */
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: var(--color-fondo-card);
+  color: var(--color-texto-secundario);
+  text-align: center;
+  padding: 16px 0;
+  font-size: 0.95rem;
+  border-top: 2px solid #146044;
+  margin-top: 40px;
+  transition: background 0.3s, color 0.3s;
+}
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+  }
+  .footer p,
+  .footer a {
+    margin-bottom: 10px;
+  }
+}
+.footer a {
+  padding: 4px;
+  border-radius: 4px;
+  color: #146044;
+  text-decoration: none;
+  margin-left: 4px;
+  transition: 0.3s ease all;
+}
+.footer a:hover {
+  background-color: var(--color-primario);
+  color: var(--color-fondo-card);
 }

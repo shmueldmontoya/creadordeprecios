@@ -109,35 +109,6 @@ Los fondos se gestionan con archivos CSS y una imagen en la carpeta `public/`. U
 
 Consulta la documentación en `public/herramientas/README-herramientas.md` para el flujo actualizado y recomendaciones de uso.
 
-### Formato de Números
-
-```javascript
-format: {
-  useThousandSeparator: true  // true = 12,345, false = 12345
-}
-```
-
-### Validaciones
-
-```javascript
-validation: {
-  requireProduct: true,        // Requerir nombre del producto
-  requireCurrentPrice: true,   // Requerir precio actual
-  requireCode: false,          // Requerir código
-  minPrice: 0,                 // Precio mínimo
-  maxPrice: 999999,            // Precio máximo
-  maxProductLength: 50         // Longitud máxima del nombre
-}
-```
-
-### Formato de Exportación
-
-```javascript
-export: {
-  imageFormat: "png",          // png, jpg, webp
-  individualPrefix: "rotulo_"  // Prefijo para archivos
-}
-```
 
 ## 🔧 Funcionalidades Técnicas
 

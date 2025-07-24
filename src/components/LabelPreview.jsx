@@ -21,21 +21,26 @@ const LabelPreview = ({ producto, actual, anterior, promo, unidad, fondo, codigo
     return num.toString();
   };
 
+  // Utilidad para obtener texto desde CSS
+  function getTextoDesdeCSS(variable, fallback) {
+    return getComputedStyle(document.documentElement).getPropertyValue(variable).replace(/"/g, "") || fallback;
+  }
+
   // Cálculo de ahorro si aplica
   let ahorro = "";
-  const textoAhorro = labels.textoAhorro || "Ahorro:";
-  const textoPrecioAnterior = labels.textoPrecioAnterior || "Precio regular:";
+  const fondoConfig = labels.backgrounds.find(bg => bg.id === fondo);
+  const textoPrecioAnterior = fondoConfig?.textoPrecioAnterior;
+  const textoAhorro = fondoConfig?.textoAhorro;
   if (anterior && actual && Number(anterior) > Number(actual)) {
     const diff = Number(anterior) - Number(actual);
     ahorro = `${store.currency}${formatNumber(diff)}`;
   }
 
   // Selección de fondo
-  const fondoConfig = labels.backgrounds.find(bg => bg.id === fondo);
   const fondoClass = fondoConfig ? `rotulo rotulo-preview ${fondoConfig.id}` : "rotulo rotulo-preview";
 
   return (
-    <div className="previsualizacion">
+    <div className={`previsualizacion ${fondo}`}>
       <h3>Vista Previa del Rótulo</h3>
       <div className="contenedor-rotulo">
         <div className={fondoClass} id="rotulo">

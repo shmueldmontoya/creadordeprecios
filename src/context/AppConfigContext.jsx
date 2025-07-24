@@ -34,22 +34,28 @@ const APP_CONFIG = {
     defaultBackground: "fondo",
 
     // Fondos disponibles para los rótulos
-    // IMPORTANTE: Los archivos CSS deben estar en /src/assets/
+    // IMPORTANTE: Los archivos CSS deben estar en la carpeta /public/
     backgrounds: [
       { 
-        id: "fondo",             // ID único del fondo
-        name: "Fondo #1",        // Nombre que se muestra en la interfaz
-        cssFile: "fondo.css" // Archivo CSS (ahora en public)
+        id: "fondo",                            // ID único del fondo, usalo como nombre de la imagen y del archivo css
+        name: "Fondo #1",                      // Nombre que se muestra en la interfaz
+        cssFile: "fondo.css",                   // Nombre del archivo CSS con estilos de los textos del fondo (debes crearlo)
+        textoPrecioAnterior: "Precio regular:", // Texto que aparece antes del precio anterior en la imagen final
+        textoAhorro: "Ahorro:"                  // Texto que aparece antes del monto ahorrado en la imagen final
       },
       { 
         id: "fondo2", 
         name: "Fondo #2", 
-        cssFile: "fondo2.css" 
+        cssFile: "fondo2.css",
+        textoPrecioAnterior: "Precio regular:",
+        textoAhorro: "Ahorro:"
       },
       { 
         id: "fondo3", 
         name: "Fondo #3", 
-        cssFile: "fondo3.css" 
+        cssFile: "fondo3.css",
+        textoPrecioAnterior: "Precio regular:",
+        textoAhorro: "Ahorro:"
       }
     ],
 
@@ -60,10 +66,6 @@ const APP_CONFIG = {
       { value: "ud", label: "Unidad" },
       { value: "", label: "No indicar" }  // Opción para no mostrar unidad, NO CAMBIAR
     ],
-
-    // Textos personalizables
-    textoAhorro: "Ahorro:",              // Texto que aparece antes del monto ahorrado
-    textoPrecioAnterior: "Precio regular:" // Texto que aparece antes del precio anterior
   },
 
   // ============================================================================

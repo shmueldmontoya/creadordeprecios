@@ -339,6 +339,7 @@ function App() {
 
   const handleDownloadAll = async () => {
     if (queue.length === 0) return;
+    await ensureAllBackgroundCSSLoaded(); // Asegura que todos los CSS de fondos estén cargados
     const zip = new JSZip();
     // Mapeo dinámico fondo -> imagen
     const fondoToImage = {};
@@ -355,8 +356,10 @@ function App() {
       temp.style.left = "-9999px";
       temp.style.top = "0";
       temp.style.zIndex = "-1";
-      const textoPrecioAnterior = labels.textoPrecioAnterior || "Precio regular:";
-      const textoAhorro = labels.textoAhorro || "Ahorro:";
+      // Obtener la configuración del fondo activo
+      const fondoConfig = labels.backgrounds.find(bg => bg.id === item.fondo);
+      const textoPrecioAnterior = fondoConfig?.textoPrecioAnterior;
+      const textoAhorro = fondoConfig?.textoAhorro;
       let ahorro = "";
       if (item.anterior && item.actual && Number(item.anterior) > Number(item.actual)) {
         const diff = Number(item.anterior) - Number(item.actual);

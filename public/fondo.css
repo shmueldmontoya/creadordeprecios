@@ -2,14 +2,14 @@
    FONDO: Mi Diseño Personalizado
    ============================================================================ */
 
-.rotulo {
+.fondo .rotulo {
   background-image: url('/fondo.png');
   background-size: cover;
   background-position: center;
   font-family: 'Mosk', sans-serif;
 }
 
-.producto {
+.fondo .producto {
   position: absolute;
   top: 150px;
   left: 40px;
@@ -19,7 +19,7 @@
   font-family: 'Mosk', sans-serif;
 }
 
-.precio-actual {
+.fondo .precio-actual {
   position: absolute;
   top: 620px;
   left: 0px;
@@ -29,7 +29,7 @@
   font-family: 'Mosk', sans-serif;
 }
 
-.antes {
+.fondo .antes {
   position: absolute;
   top: 730px;
   left: 0px;
@@ -39,7 +39,7 @@
   font-family: 'Mosk', sans-serif;
 }
 
-.ahorre {
+.fondo .ahorre {
   position: absolute;
   top: 770px;
   left: 0px;

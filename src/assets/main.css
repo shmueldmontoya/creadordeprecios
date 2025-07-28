@@ -495,19 +495,22 @@ input[type=number] { /* Para Firefox */
    NUEVA PREVISUALIZACIÓN MEJORADA
    ============================================================================ */
 
-.previsualizacion {
+.contenedor-previsualizacion {
   align-self: center;
   width: 85%;
+  margin: 20px;
+  padding: 0;
   max-width: 500px;
+}
+.previsualizacion {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
   padding: 20px;
   background: var(--color-fondo-card);
   border-radius: 10px;
   box-shadow: 0 4px 12px var(--color-sombra);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .previsualizacion h3 {
@@ -1326,4 +1329,72 @@ input[type=number] { /* Para Firefox */
 .footer a:hover {
   background-color: var(--color-primario);
   color: var(--color-fondo-card);
+}
+
+/* Animaciones para el overlay de procesando */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos para el overlay de procesando */
+.processing-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.processing-card {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 40px 60px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.processing-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255,255,255,0.3);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+.processing-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.processing-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-weight: 300;
 }

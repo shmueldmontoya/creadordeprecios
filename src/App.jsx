@@ -12,6 +12,7 @@ import { saveAs } from "file-saver";
 import JSZip from "jszip";
 import useProductos from "./hooks/useProductos";
 import Footer from "./components/Footer";
+import useImageSize from "./hooks/useImageSize";
 
 function App() {
   const { labels, store, format, products, export: exportConfig, validation } = useAppConfig();
@@ -37,6 +38,7 @@ function App() {
   const { productos, filtrar } = useProductos();
   const [autocomplete, setAutocomplete] = useState([]);
   const formRefs = useRef([]);
+  const [processing, setProcessing] = useState(false);
 
   // Inicializar la unidad por defecto después de que se cargue la configuración
   useEffect(() => {
@@ -226,6 +228,76 @@ function App() {
     return errs;
   };
 
+  // Ocultar la previsualización y mostrar overlay durante la exportación
+  const exportRotulo = async (rotulo, width, height, filename, mimeType, showOverlay = true, hidePreview = true) => {
+    // Guardar estilos originales
+    const originalStyle = {
+      position: rotulo.style.position,
+      left: rotulo.style.left,
+      top: rotulo.style.top,
+      width: rotulo.style.width,
+      height: rotulo.style.height,
+      visibility: rotulo.style.visibility,
+      zIndex: rotulo.style.zIndex,
+      transform: rotulo.style.transform,
+      transformOrigin: rotulo.style.transformOrigin,
+    };
+    // Ocultar previsualización solo si se solicita
+    if (hidePreview && previewRef.current) {
+      previewRef.current.style.visibility = 'hidden';
+      previewRef.current.style.position = 'absolute';
+      previewRef.current.style.left = '-99999px';
+      previewRef.current.style.top = '-99999px';
+      previewRef.current.style.zIndex = '-1';
+    }
+    // Calcular factor de escala
+    const previewWidth = rotulo.offsetWidth;
+    const previewHeight = rotulo.offsetHeight;
+    const scaleX = width / previewWidth;
+    const scaleY = height / previewHeight;
+    // Cambiar tamaño y escalar el rótulo
+    rotulo.style.width = previewWidth + 'px';
+    rotulo.style.height = previewHeight + 'px';
+    rotulo.style.position = 'absolute';
+    rotulo.style.left = '-99999px';
+    rotulo.style.top = '-99999px';
+    rotulo.style.zIndex = '-1';
+    rotulo.style.visibility = 'visible';
+    rotulo.style.transform = `scale(${scaleX}, ${scaleY})`;
+    rotulo.style.transformOrigin = 'top left';
+    if (showOverlay) {
+      setProcessing(true);
+    }
+    await new Promise(resolve => setTimeout(resolve, 50)); // Esperar a que el DOM se actualice
+    const canvas = await html2canvas(rotulo, { backgroundColor: null, useCORS: true, width, height, scale: 1 });
+    if (showOverlay) {
+      setProcessing(false);
+    }
+    // Restaurar estilos
+    rotulo.style.position = originalStyle.position;
+    rotulo.style.left = originalStyle.left;
+    rotulo.style.top = originalStyle.top;
+    rotulo.style.width = originalStyle.width;
+    rotulo.style.height = originalStyle.height;
+    rotulo.style.visibility = originalStyle.visibility;
+    rotulo.style.zIndex = originalStyle.zIndex;
+    rotulo.style.transform = originalStyle.transform;
+    rotulo.style.transformOrigin = originalStyle.transformOrigin;
+    // Restaurar previsualización solo si se ocultó
+    if (hidePreview && previewRef.current) {
+      previewRef.current.style.visibility = 'visible';
+      previewRef.current.style.position = '';
+      previewRef.current.style.left = '';
+      previewRef.current.style.top = '';
+      previewRef.current.style.zIndex = '';
+    }
+    return new Promise(resolve => {
+      canvas.toBlob(blob => {
+        resolve(blob);
+      }, mimeType);
+    });
+  };
+
   const handleDownload = async () => {
     const errs = validateForm();
     if (errs.length > 0) {
@@ -234,23 +306,22 @@ function App() {
     }
     const rotulo = document.getElementById("rotulo");
     if (!rotulo) return;
+    if (!realSize.width || !realSize.height) {
+      showNotification("error", "No se pudo obtener el tamaño real del fondo");
+      return;
+    }
     try {
-      const canvas = await html2canvas(rotulo, { backgroundColor: null, useCORS: true });
       const format = exportConfig?.imageFormat || "png";
       const mimeType = format === "jpg" ? "image/jpeg" : `image/${format}`;
-      console.log('Formato configurado:', format);
-      console.log('MIME type:', mimeType);
-      console.log('Configuración export:', exportConfig);
-      canvas.toBlob(blob => {
-        if (blob) {
-          const prefix = exportConfig?.individualPrefix || "rotulo_";
-          const filename = `${prefix}${form.producto || "sin_nombre"}.${format}`;
-          console.log('Archivo a descargar:', filename);
-          saveAs(blob, filename);
-          showNotification("success", "Imagen descargada correctamente");
-        }
-      }, mimeType);
+      const prefix = exportConfig?.individualPrefix || "rotulo_";
+      const filename = `${prefix}${form.producto || "sin_nombre"}.${format}`;
+      const blob = await exportRotulo(rotulo, realSize.width, realSize.height, filename, mimeType, true, true);
+      if (blob) {
+        saveAs(blob, filename);
+        showNotification("success", "Imagen descargada correctamente");
+      }
     } catch (err) {
+      setProcessing(false);
       showNotification("error", "Error al generar la imagen");
     }
   };
@@ -339,58 +410,55 @@ function App() {
 
   const handleDownloadAll = async () => {
     if (queue.length === 0) return;
+    setProcessing(true);
+    // Ocultar previsualización al inicio del lote
+    if (previewRef.current) {
+      previewRef.current.style.visibility = 'hidden';
+      previewRef.current.style.position = 'absolute';
+      previewRef.current.style.left = '-99999px';
+      previewRef.current.style.top = '-99999px';
+      previewRef.current.style.zIndex = '-1';
+    }
     await ensureAllBackgroundCSSLoaded(); // Asegura que todos los CSS de fondos estén cargados
     const zip = new JSZip();
-    // Mapeo dinámico fondo -> imagen
-    const fondoToImage = {};
-    labels.backgrounds.forEach(bg => {
-      // Obtener el nombre base del archivo CSS y cambiar la extensión a .png
-      const base = bg.cssFile.replace(/\.css$/, "");
-      fondoToImage[bg.id] = `/${base}.png`;
-    });
     for (let i = 0; i < queue.length; i++) {
       const item = queue[i];
-      // Renderizar el rótulo en un contenedor oculto
-      const temp = document.createElement("div");
-      temp.style.position = "fixed";
-      temp.style.left = "-9999px";
-      temp.style.top = "0";
-      temp.style.zIndex = "-1";
-      // Obtener la configuración del fondo activo
-      const fondoConfig = labels.backgrounds.find(bg => bg.id === item.fondo);
-      const textoPrecioAnterior = fondoConfig?.textoPrecioAnterior;
-      const textoAhorro = fondoConfig?.textoAhorro;
-      let ahorro = "";
-      if (item.anterior && item.actual && Number(item.anterior) > Number(item.actual)) {
-        const diff = Number(item.anterior) - Number(item.actual);
-        ahorro = `${store.currency}${formatNumber(diff)}`;
+      // Obtener fondo y tamaño real para cada item
+      const fondoConfigItem = labels.backgrounds.find(bg => bg.id === item.fondo);
+      const fondoImageFileItem = fondoConfigItem ? `${fondoConfigItem.id}.png` : null;
+      // Usar el hook manualmente para obtener el tamaño real (no se puede usar hook en ciclo, así que cargamos la imagen aquí)
+      const size = await new Promise(resolve => {
+        if (!fondoImageFileItem) return resolve({ width: null, height: null });
+        const img = new window.Image();
+        img.src = `/${fondoImageFileItem}`;
+        img.onload = () => resolve({ width: img.naturalWidth, height: img.naturalHeight });
+        img.onerror = () => resolve({ width: null, height: null });
+      });
+      if (!size.width || !size.height) continue;
+      // Renderizar el rótulo temporalmente con los datos del item
+      setForm(item);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Esperar a que el DOM se actualice
+      const rotuloTemp = document.getElementById("rotulo");
+      const format = exportConfig?.imageFormat || "png";
+      const mimeType = format === "jpg" ? "image/jpeg" : `image/${format}`;
+      const prefix = exportConfig?.individualPrefix || "rotulo_";
+      const filename = `${prefix}${item.producto || "sin_nombre"}_${i + 1}.${format}`;
+      const blob = await exportRotulo(rotuloTemp, size.width, size.height, filename, mimeType, false, false);
+      if (blob) {
+        zip.file(filename, blob);
       }
-      // Obtener la imagen de fondo correspondiente
-      const fondoImg = fondoToImage[item.fondo] || fondoToImage[labels.defaultBackground] || '/fondo.png';
-      temp.innerHTML = `<div class='rotulo rotulo-preview ${item.fondo}' id='rotulo-temp' style="background-image:url('${fondoImg}');background-size:cover;background-position:center;">
-        <div class='producto' id='texto-producto'>${item.producto}</div>
-        <div class='precio-actual' id='texto-actual'>
-          ${item.promo && item.promo > 0 ? `<span class='promo' id='texto-promo'>${item.promo}x&nbsp;</span>` : ''}${store.currency}${formatNumber(item.actual)}${item.unidad ? ` <span class='unidad'>/ ${item.unidad}</span>` : ""}
-        </div>
-        <div class='antes' id='texto-anterior'>${item.anterior && Number(item.anterior) > Number(item.actual) ? `${textoPrecioAnterior} ${store.currency}${formatNumber(item.anterior)}` : ""}</div>
-        <div class='ahorre' id='texto-ahorre'>${ahorro && `${textoAhorro} ${ahorro}`}</div>
-      </div>`;
-      document.body.appendChild(temp);
-      const rotuloTemp = temp.querySelector("#rotulo-temp");
-      try {
-        const canvas = await html2canvas(rotuloTemp, { backgroundColor: null, useCORS: true });
-        const format = exportConfig?.imageFormat || "png";
-        const mimeType = format === "jpg" ? "image/jpeg" : `image/${format}`;
-        const blob = await new Promise(resolve => canvas.toBlob(resolve, mimeType));
-        const prefix = exportConfig?.individualPrefix || "rotulo_";
-        zip.file(`${prefix}${item.producto || "sin_nombre"}_${i + 1}.${format}`, blob);
-      } catch (err) {
-        // Si falla, no agrega la imagen
-      }
-      document.body.removeChild(temp);
     }
     const zipBlob = await zip.generateAsync({ type: "blob" });
     saveAs(zipBlob, `${zipName || "rotulos"}.zip`);
+    setProcessing(false);
+    // Restaurar previsualización al final del lote
+    if (previewRef.current) {
+      previewRef.current.style.visibility = 'visible';
+      previewRef.current.style.position = '';
+      previewRef.current.style.left = '';
+      previewRef.current.style.top = '';
+      previewRef.current.style.zIndex = '';
+    }
     showNotification("success", "Descarga en lote completada");
   };
 
@@ -432,6 +500,12 @@ function App() {
     // Limpieza opcional: no removemos el link para mantener el fondo
   }, [form.fondo, labels.backgrounds]);
 
+  // Obtener el archivo de imagen de fondo actual
+  const fondoConfig = labels.backgrounds.find(bg => bg.id === form.fondo);
+  const fondoImageFile = fondoConfig ? `${fondoConfig.id}.png` : null;
+  const realSize = useImageSize(fondoImageFile);
+  const previewRef = useRef();
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Header onHelp={handleHelp} onToggleTheme={handleToggleTheme} />
@@ -446,15 +520,30 @@ function App() {
         onAddToQueue={handleAddToQueue}
         errors={errors}
       />
-      <LabelPreview
-        producto={form.producto}
-        actual={form.actual}
-        anterior={form.anterior}
-        promo={form.promo}
-        unidad={form.unidad}
-        fondo={form.fondo}
-        codigo={form.codigo}
-      />
+      <div className="contenedor-previsualizacion" ref={previewRef}>
+        <LabelPreview
+          producto={form.producto}
+          actual={form.actual}
+          anterior={form.anterior}
+          promo={form.promo}
+          unidad={form.unidad}
+          fondo={form.fondo}
+          codigo={form.codigo}
+        />
+      </div>
+      {processing && (
+        <div className="processing-overlay">
+          <div className="processing-card">
+            <div className="processing-spinner"></div>
+            <div className="processing-title">
+              Procesando...
+            </div>
+            <div className="processing-subtitle">
+              Generando las imágenes
+            </div>
+          </div>
+        </div>
+      )}
       <LabelQueue
         queue={queue}
         zipName={zipName}

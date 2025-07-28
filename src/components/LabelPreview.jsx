@@ -1,8 +1,14 @@
 import React from "react";
 import { useAppConfig } from "../context/AppConfigContext";
+import useImageSize from "../hooks/useImageSize";
 
 const LabelPreview = ({ producto, actual, anterior, promo, unidad, fondo, codigo }) => {
   const { labels, store, format } = useAppConfig();
+
+  // Detectar el archivo de imagen según el fondo seleccionado
+  const fondoConfig = labels.backgrounds.find(bg => bg.id === fondo);
+  const fondoImageFile = fondoConfig ? `${fondoConfig.id}.png` : null;
+  const realSize = useImageSize(fondoImageFile);
 
   // Función utilitaria para formatear números según la configuración
   const formatNumber = (number) => {
@@ -28,7 +34,6 @@ const LabelPreview = ({ producto, actual, anterior, promo, unidad, fondo, codigo
 
   // Cálculo de ahorro si aplica
   let ahorro = "";
-  const fondoConfig = labels.backgrounds.find(bg => bg.id === fondo);
   const textoPrecioAnterior = fondoConfig?.textoPrecioAnterior;
   const textoAhorro = fondoConfig?.textoAhorro;
   if (anterior && actual && Number(anterior) > Number(actual)) {
@@ -63,7 +68,14 @@ const LabelPreview = ({ producto, actual, anterior, promo, unidad, fondo, codigo
         </div>
       </div>
       <div className="indicador-tamaño" id="indicadorTamaño">
-        Tamaño real: {labels.dimensions.width} x {labels.dimensions.height} píxeles | Vista previa: {Math.round(labels.dimensions.width * labels.dimensions.previewScale)} x {Math.round(labels.dimensions.height * labels.dimensions.previewScale)} píxeles
+        {realSize.width && realSize.height ? (
+          <>
+            Tamaño real: {realSize.width} x {realSize.height} píxeles |
+            Vista previa: {Math.round(realSize.width * labels.dimensions.previewScale)} x {Math.round(realSize.height * labels.dimensions.previewScale)} píxeles
+          </>
+        ) : (
+          <>Tamaño real: No disponible</>
+        )}
       </div>
     </div>
   );

@@ -25,8 +25,6 @@ const APP_CONFIG = {
   labels: {
     // Dimensiones del rótulo en píxeles
     dimensions: {
-      width: 768,                // Ancho del rótulo, NO CAMBIAR
-      height: 993,               // Alto del rótulo, NO CAMBIAR
       previewScale: 0.4          // Escala de la vista previa, NO CAMBIAR
     },
 

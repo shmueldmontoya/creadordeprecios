@@ -71,15 +71,15 @@ function App() {
   }, [queue]);
 
   const clearForm = () => {
-    setForm({
+    setForm(prev => ({
+      ...prev,
       codigo: "",
       producto: "",
       promo: "",
       actual: "",
       anterior: "",
-      unidad: products?.defaultUnit || "",
-      fondo: labels.defaultBackground || "fondo"
-    });
+      unidad: products?.defaultUnit || ""
+    }));
     setErrors({});
     setAutocomplete([]);
   };

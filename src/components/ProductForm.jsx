@@ -21,6 +21,7 @@ const ProductForm = ({
         <i className="fas fa-barcode" aria-hidden="true"></i>
         <input
           type="number"
+          onWheel={(e) => e.target.blur()}
           id="codigo"
           name="codigo"
           value={values.codigo}
@@ -61,6 +62,7 @@ const ProductForm = ({
         <i className="fas fa-times-circle" aria-hidden="true"></i>
         <input
           type="number"
+          onWheel={(e) => e.target.blur()}
           id="promo"
           name="promo"
           value={values.promo}
@@ -81,6 +83,7 @@ const ProductForm = ({
         <i className="fas fa-dollar-sign" aria-hidden="true"></i>
         <input
           type="number"
+          onWheel={(e) => e.target.blur()}
           id="actual"
           name="actual"
           value={values.actual}
@@ -101,6 +104,7 @@ const ProductForm = ({
         <i className="fas fa-tag" aria-hidden="true"></i>
         <input
           type="number"
+          onWheel={(e) => e.target.blur()}
           id="anterior"
           name="anterior"
           value={values.anterior}

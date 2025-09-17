@@ -228,69 +228,61 @@ function App() {
     return errs;
   };
 
-  // Ocultar la previsualización y mostrar overlay durante la exportación
+  // Exportar rótulo a imagen
   const exportRotulo = async (rotulo, width, height, filename, mimeType, showOverlay = true, hidePreview = true) => {
     // Guardar estilos originales
-    const originalStyle = {
+    const originalStyles = {
+      width: rotulo.style.width,
+      height: rotulo.style.height,
+      transform: rotulo.style.transform,
       position: rotulo.style.position,
       left: rotulo.style.left,
       top: rotulo.style.top,
-      width: rotulo.style.width,
-      height: rotulo.style.height,
-      visibility: rotulo.style.visibility,
       zIndex: rotulo.style.zIndex,
-      transform: rotulo.style.transform,
-      transformOrigin: rotulo.style.transformOrigin,
+      visibility: rotulo.style.visibility
     };
+
     // Ocultar previsualización solo si se solicita
     if (hidePreview && previewRef.current) {
       previewRef.current.style.visibility = 'hidden';
-      previewRef.current.style.position = 'absolute';
-      previewRef.current.style.left = '-99999px';
-      previewRef.current.style.top = '-99999px';
-      previewRef.current.style.zIndex = '-1';
     }
-    // Calcular factor de escala
-    const previewWidth = rotulo.offsetWidth;
-    const previewHeight = rotulo.offsetHeight;
-    const scaleX = width / previewWidth;
-    const scaleY = height / previewHeight;
-    // Cambiar tamaño y escalar el rótulo
-    rotulo.style.width = previewWidth + 'px';
-    rotulo.style.height = previewHeight + 'px';
+
+    // Preparar el rótulo para captura con dimensiones exactas
+    rotulo.style.width = width + 'px';
+    rotulo.style.height = height + 'px';
+    rotulo.style.transform = 'none';
     rotulo.style.position = 'absolute';
     rotulo.style.left = '-99999px';
     rotulo.style.top = '-99999px';
     rotulo.style.zIndex = '-1';
     rotulo.style.visibility = 'visible';
-    rotulo.style.transform = `scale(${scaleX}, ${scaleY})`;
-    rotulo.style.transformOrigin = 'top left';
+
     if (showOverlay) {
       setProcessing(true);
     }
+
     await new Promise(resolve => setTimeout(resolve, 50)); // Esperar a que el DOM se actualice
     const canvas = await html2canvas(rotulo, { backgroundColor: null, useCORS: true, width, height, scale: 1 });
+
     if (showOverlay) {
       setProcessing(false);
     }
-    // Restaurar estilos
-    rotulo.style.position = originalStyle.position;
-    rotulo.style.left = originalStyle.left;
-    rotulo.style.top = originalStyle.top;
-    rotulo.style.width = originalStyle.width;
-    rotulo.style.height = originalStyle.height;
-    rotulo.style.visibility = originalStyle.visibility;
-    rotulo.style.zIndex = originalStyle.zIndex;
-    rotulo.style.transform = originalStyle.transform;
-    rotulo.style.transformOrigin = originalStyle.transformOrigin;
+
+    // Restaurar estilos originales
+    rotulo.style.width = originalStyles.width;
+    rotulo.style.height = originalStyles.height;
+    rotulo.style.transform = originalStyles.transform;
+    rotulo.style.position = originalStyles.position;
+    rotulo.style.left = originalStyles.left;
+    rotulo.style.top = originalStyles.top;
+    rotulo.style.zIndex = originalStyles.zIndex;
+    rotulo.style.visibility = originalStyles.visibility;
+
     // Restaurar previsualización solo si se ocultó
     if (hidePreview && previewRef.current) {
       previewRef.current.style.visibility = 'visible';
-      previewRef.current.style.position = '';
-      previewRef.current.style.left = '';
-      previewRef.current.style.top = '';
-      previewRef.current.style.zIndex = '';
     }
+
     return new Promise(resolve => {
       canvas.toBlob(blob => {
         resolve(blob);

@@ -44,11 +44,41 @@ const LabelPreview = ({ producto, actual, anterior, promo, unidad, fondo, codigo
   // Selección de fondo
   const fondoClass = fondoConfig ? `rotulo rotulo-preview ${fondoConfig.id}` : "rotulo rotulo-preview";
 
+  // Calcular dimensiones del contenedor basadas en las proporciones del fondo
+  const containerWidth = realSize.width && realSize.height
+    ? Math.min(400, realSize.width * 0.4)  // Máximo 400px, escala 0.4
+    : 307;  // Valor por defecto
+
+  const containerHeight = realSize.width && realSize.height
+    ? Math.min(400, realSize.height * 0.4)  // Máximo 400px, escala 0.4
+    : 397;  // Valor por defecto
+
+  // Calcular la escala para el elemento interno basada en las proporciones
+  const scaleX = containerWidth / (realSize.width || 768);
+  const scaleY = containerHeight / (realSize.height || 993);
+  const scale = Math.min(scaleX, scaleY);
+
   return (
     <div className={`previsualizacion ${fondo}`}>
       <h3>Vista Previa del Rótulo</h3>
-      <div className="contenedor-rotulo">
-        <div className={fondoClass} id="rotulo">
+      <div
+        className="contenedor-rotulo"
+        style={{
+          width: `${containerWidth}px`,
+          height: `${containerHeight}px`,
+          maxWidth: '400px',
+          maxHeight: '400px'
+        }}
+      >
+        <div
+          className={fondoClass}
+          id="rotulo"
+          style={{
+            width: realSize.width || 768,
+            height: realSize.height || 993,
+            transform: `translate(-50%, -50%) scale(${scale})`
+          }}
+        >
           <div className="producto" id="texto-producto">{producto}</div>
           <div className="precio-actual" id="texto-actual">
             {promo && promo > 0 && (

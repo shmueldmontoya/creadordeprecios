@@ -35,25 +35,36 @@ const APP_CONFIG = {
     // IMPORTANTE: Los archivos CSS deben estar en la carpeta /public/
     backgrounds: [
       { 
-        id: "fondo",                            // ID único del fondo, usalo como nombre de la imagen y del archivo css
-        name: "Fondo #1",                      // Nombre que se muestra en la interfaz
-        cssFile: "fondo.css",                   // Nombre del archivo CSS con estilos de los textos del fondo (debes crearlo)
-        textoPrecioAnterior: "Precio regular:", // Texto que aparece antes del precio anterior en la imagen final
-        textoAhorro: "Ahorro:"                  // Texto que aparece antes del monto ahorrado en la imagen final
+        id: "fondo",                             // ID único del fondo, usalo como nombre de la imagen y del archivo css
+        name: "Fondo #1",                        // Nombre que se muestra en la interfaz
+        cssFile: "fondo.css",                    // Nombre del archivo CSS con estilos de los textos del fondo (debes crearlo)
+        textoPrecioAnterior: "Precio regular:",  // Texto que aparece antes del precio anterior en la imagen final
+        textoAhorro: "Ahorro:",                  // Texto que aparece antes del monto ahorrado en la imagen final
+        es4Paneles: false                        // Indica que este fondo es del tipo 4 paneles
       },
       { 
         id: "fondo2", 
         name: "Fondo #2", 
         cssFile: "fondo2.css",
         textoPrecioAnterior: "Precio regular:",
-        textoAhorro: "Ahorro:"
+        textoAhorro: "Ahorro:",
+        es4Paneles: false
       },
       { 
         id: "fondo3", 
         name: "Fondo #3", 
         cssFile: "fondo3.css",
         textoPrecioAnterior: "Precio regular:",
-        textoAhorro: "Ahorro:"
+        textoAhorro: "Ahorro:",
+        es4Paneles: false
+      },
+      {
+        id: "4panelejemplo",
+        name: "4 Paneles Ejemplo",
+        cssFile: "4panelejemplo.css",
+        textoPrecioAnterior: "",
+        textoAhorro: "",
+        es4Paneles: true
       }
     ],
 

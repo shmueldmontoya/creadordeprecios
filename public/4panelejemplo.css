@@ -1,0 +1,154 @@
+/* ============================================================================
+   FONDO: 4 Paneles Ejemplo
+   ============================================================================ */
+
+.rotulo {
+  background-image: url('/4panelejemplo.png');
+  background-size: cover;
+  background-position: center;
+  font-family: 'Mosk', sans-serif;
+}
+
+/* Panel 1 - Superior Izquierdo */
+
+.producto-panel1 {
+  top: 140px;
+  right: 1000px;
+  color: #75351b;
+  font-size: 110px;
+  font-weight: bold;
+  white-space: pre-line;
+  line-height: 1.2;
+}
+
+.precio-actual-panel1 {
+  top: 625px;
+  left: -850px;
+  right: 0px;
+  color: #ff0000;
+  font-size: 300px;
+  font-weight: bold;
+}
+
+.antes-panel1 {
+  top: 1100px;
+  right: 1125px;
+  color: #ff0000;
+  font-size: 110px;
+}
+
+.ahorre-panel1 {
+  top: 1100px;
+  right: 300px;
+  color: #ff0000;
+  font-size: 110px;
+  font-weight: bold;
+}
+
+/* Panel 2 - Superior Derecho */
+
+.producto-panel2 {
+  top: 140px;
+  right: -2300px;
+  color: #75351b;
+  font-size: 110px;
+  font-weight: bold;
+  white-space: pre-line;
+  line-height: 1.2;
+}
+
+.precio-actual-panel2 {
+  top: 625px;
+  left: 850px;
+  right: 0px;
+  color: #ff0000;
+  font-size: 300px;
+  font-weight: bold;
+}
+
+.antes-panel2 {
+  top: 1100px;
+  right: -550px;
+  color: #ff0000;
+  font-size: 110px;
+}
+
+.ahorre-panel2 {
+  top: 1100px;
+  right: -1350px;
+  color: #ff0000;
+  font-size: 110px;
+  font-weight: bold;
+}
+
+/* Panel 3 - Inferior Izquierdo */
+
+.producto-panel3 {
+  top: 1415px;
+  right: 1000px;
+  color: #75351b;
+  font-size: 110px;
+  font-weight: bold;
+  white-space: pre-line;
+  line-height: 1.2;
+}
+
+.precio-actual-panel3 {
+  top: 1900px;
+  left: -850px;
+  right: 0px;
+  color: #ff0000;
+  font-size: 300px;
+  font-weight: bold;
+}
+
+.antes-panel3 {
+  top: 2375px;
+  right: 1125px;
+  color: #ff0000;
+  font-size: 110px;
+}
+
+.ahorre-panel3 {
+  top: 2375px;
+  right: 300px;
+  color: #ff0000;
+  font-size: 110px;
+  font-weight: bold;
+}
+
+/* Panel 4 - Inferior Derecho */
+
+.producto-panel4 {
+  top: 1415px;
+  right: -2300px;
+  color: #75351b;
+  font-size: 110px;
+  font-weight: bold;
+  white-space: pre-line;
+  line-height: 1.2;
+}
+
+.precio-actual-panel4 {
+  top: 1900px;
+  left: 850px;
+  right: 0px;
+  color: #ff0000;
+  font-size: 300px;
+  font-weight: bold;
+}
+
+.antes-panel4 {
+  top: 2375px;
+  right: -550px;
+  color: #ff0000;
+  font-size: 110px;
+}
+
+.ahorre-panel4 {
+  top: 2375px;
+  right: -1350px;
+  color: #ff0000;
+  font-size: 110px;
+  font-weight: bold;
+}

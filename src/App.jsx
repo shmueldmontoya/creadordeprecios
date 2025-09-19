@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Header from "./components/Header";
+import Accordion from "./components/Accordion";
 import ProductForm from "./components/ProductForm";
 import LabelPreview from "./components/LabelPreview";
 import LabelQueue from "./components/LabelQueue";
@@ -18,15 +19,44 @@ function App() {
   const { labels, store, format, products, export: exportConfig, validation } = useAppConfig();
   const [theme, setTheme] = useState("light");
   const [showHelp, setShowHelp] = useState(false);
-  const [form, setForm] = useState({
-    codigo: "",
-    producto: "",
-    promo: "",
-    actual: "",
-    anterior: "",
-    unidad: "",
-    fondo: labels.defaultBackground || "fondo"
-  });
+  const [forms, setForms] = useState([
+    {
+      codigo: "",
+      producto: "",
+      promo: "",
+      actual: "",
+      anterior: "",
+      unidad: "",
+      fondo: labels.defaultBackground || "fondo"
+    },
+    {
+      codigo: "",
+      producto: "",
+      promo: "",
+      actual: "",
+      anterior: "",
+      unidad: "",
+      fondo: labels.defaultBackground || "fondo"
+    },
+    {
+      codigo: "",
+      producto: "",
+      promo: "",
+      actual: "",
+      anterior: "",
+      unidad: "",
+      fondo: labels.defaultBackground || "fondo"
+    },
+    {
+      codigo: "",
+      producto: "",
+      promo: "",
+      actual: "",
+      anterior: "",
+      unidad: "",
+      fondo: labels.defaultBackground || "fondo"
+    }
+  ]);
   const [queue, setQueue] = useState([]);
   const [zipName, setZipName] = useState("");
   const [editIdx, setEditIdx] = useState(null);
@@ -34,7 +64,7 @@ function App() {
   const [notification, setNotification] = useState({ visible: false, type: "success", message: "" });
   const notificationTimeout = useRef(null);
   const notificationCloseTimeout = useRef(null);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState([{}, {}, {}, {}]);
   const { productos, filtrar } = useProductos();
   const [autocomplete, setAutocomplete] = useState([]);
   const formRefs = useRef([]);
@@ -42,11 +72,98 @@ function App() {
 
   // Inicializar la unidad por defecto después de que se cargue la configuración
   useEffect(() => {
-    setForm(prev => ({
-      ...prev,
+    setForms(prev => prev.map(form => ({
+      ...form,
       unidad: products?.defaultUnit || ""
-    }));
+    })));
   }, [products]);
+
+  // Detectar si el fondo actual es de 4 paneles
+  const is4Paneles = () => {
+    const fondoConfig = labels.backgrounds.find(bg => bg.id === forms[0].fondo);
+    return fondoConfig?.es4Paneles || false;
+  };
+
+  // Combinar datos de los 4 formularios para previsualización
+  const getCombinedFormData = () => {
+    if (!is4Paneles()) {
+      return forms[0];
+    }
+    // Para 4 paneles, combinar datos de todos los formularios
+    return {
+      ...forms[0], // Usar el primer formulario como base
+      producto: forms.map(f => f.producto).join(' | '),
+      actual: forms.map(f => f.actual).join(' | '),
+      anterior: forms.map(f => f.anterior).join(' | '),
+      promo: forms.map(f => f.promo).join(' | '),
+      unidad: forms.map(f => f.unidad).join(' | '), // Combinar unidades de todos los paneles
+      codigo: forms.map(f => f.codigo).join(' | ')
+    };
+  };
+
+  // Manejar cambios en formularios individuales
+  const handleFormChange = (index, e) => {
+    const { name, value } = e.target;
+    if (name === "codigo") {
+      // Buscar producto por código
+      const prod = productos.find(p => p.codigos && p.codigos.includes(value));
+      setForms(prev => prev.map((form, i) =>
+        i === index ? {
+          ...form,
+          codigo: value,
+          producto: prod ? prod.nombre : ""
+        } : form
+      ));
+    } else if (name === "producto") {
+      setForms(prev => prev.map((form, i) =>
+        i === index ? { ...form, producto: value } : form
+      ));
+    } else {
+      setForms(prev => prev.map((form, i) =>
+        i === index ? { ...form, [name]: value } : form
+      ));
+    }
+  };
+
+  const handleUnitChange = (index, e) => {
+    setForms(prev => prev.map((form, i) =>
+      i === index ? { ...form, unidad: e.target.value } : form
+    ));
+  };
+
+  // Funciones para modo de un solo formulario
+  const handleSingleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "codigo") {
+      const prod = productos.find(p => p.codigos && p.codigos.includes(value));
+      setForms(prev => prev.map((form, i) =>
+        i === 0 ? {
+          ...form,
+          codigo: value,
+          producto: prod ? prod.nombre : ""
+        } : form
+      ));
+    } else if (name === "producto") {
+      setForms(prev => prev.map((form, i) =>
+        i === 0 ? { ...form, producto: value } : form
+      ));
+    } else {
+      setForms(prev => prev.map((form, i) =>
+        i === 0 ? { ...form, [name]: value } : form
+      ));
+    }
+  };
+
+  const handleSingleUnitChange = (e) => {
+    setForms(prev => prev.map((form, i) =>
+      i === 0 ? { ...form, unidad: e.target.value } : form
+    ));
+  };
+
+  const handleBackgroundChange = (e) => {
+    const newFondo = e.target.value;
+    setForms(prev => prev.map(form => ({ ...form, fondo: newFondo })));
+  };
 
   // Cargar cola desde localStorage al iniciar
   useEffect(() => {
@@ -71,16 +188,16 @@ function App() {
   }, [queue]);
 
   const clearForm = () => {
-    setForm(prev => ({
-      ...prev,
+    setForms(prev => prev.map(form => ({
+      ...form,
       codigo: "",
       producto: "",
       promo: "",
       actual: "",
       anterior: "",
       unidad: products?.defaultUnit || ""
-    }));
-    setErrors({});
+    })));
+    setErrors([{}, {}, {}, {}]);
     setAutocomplete([]);
   };
 
@@ -114,13 +231,14 @@ function App() {
     setAutocomplete([]);
   };
 
-  const handleUnitChange = (e) => {
-    setForm((prev) => ({ ...prev, unidad: e.target.value }));
-  };
+  // Funciones originales comentadas - ahora se usan las nuevas versiones arriba
+  // const handleUnitChange = (e) => {
+  //   setForm((prev) => ({ ...prev, unidad: e.target.value }));
+  // };
 
-  const handleBackgroundChange = (e) => {
-    setForm((prev) => ({ ...prev, fondo: e.target.value }));
-  };
+  // const handleBackgroundChange = (e) => {
+  //   setForm((prev) => ({ ...prev, fondo: e.target.value }));
+  // };
 
   // Sistema de notificaciones fiel al original
   const showNotification = (type, message) => {
@@ -178,53 +296,120 @@ function App() {
   const validateForm = () => {
     const errs = [];
     const validationConfig = validation || {};
-    
-    // Validar producto según requireProduct
-    if (validationConfig.requireProduct && !form.producto) {
-      errs.push('El nombre del producto es requerido');
-    } else if (form.producto && form.producto.length > (validationConfig.maxProductLength ?? 50)) {
-      errs.push('El nombre del producto debe tener máximo ' + (validationConfig.maxProductLength ?? 50) + ' caracteres');
-    }
-    
-    // Validar precio actual según requireCurrentPrice
-    if (validationConfig.requireCurrentPrice && !form.actual) {
-      errs.push('El precio actual es requerido');
-    } else if (form.actual) {
-      const precioActual = Number(form.actual);
-      if (isNaN(precioActual)) {
-        errs.push('El precio actual debe ser un número válido');
-      } else if (precioActual < (validationConfig.minPrice ?? 0)) {
-        errs.push('El precio actual debe ser mayor o igual a ' + (validationConfig.minPrice ?? 0));
-      } else if (precioActual > (validationConfig.maxPrice ?? 999999)) {
-        errs.push('El precio actual debe ser menor o igual a ' + (validationConfig.maxPrice ?? 999999));
+
+    if (is4Paneles()) {
+      // Modo 4 paneles: validar que al menos un panel tenga los campos requeridos
+      const hasValidPanel = forms.some(form => {
+        const hasRequiredProduct = !validationConfig.requireProduct || (form.producto && form.producto.trim() !== '');
+        const hasRequiredPrice = !validationConfig.requireCurrentPrice || (form.actual && form.actual.trim() !== '');
+        const hasRequiredCode = !validationConfig.requireCode || (form.codigo && form.codigo.trim() !== '');
+
+        return hasRequiredProduct && hasRequiredPrice && hasRequiredCode;
+      });
+
+      if (!hasValidPanel) {
+        errs.push('Al menos un panel debe tener nombre del producto, precio actual y código completos');
+        return errs;
+      }
+
+      // Validar solo los paneles que tienen datos
+      forms.forEach((form, index) => {
+        // Solo validar si el panel tiene algún dato
+        if (form.producto || form.actual || form.anterior || form.promo || form.codigo) {
+          const panelPrefix = `Panel ${index + 1}: `;
+
+          // Validar producto según requireProduct (solo si está presente)
+          if (form.producto && form.producto.length > (validationConfig.maxProductLength ?? 50)) {
+            errs.push(`${panelPrefix}El nombre del producto debe tener máximo ${validationConfig.maxProductLength ?? 50} caracteres`);
+          }
+
+          // Validar precio actual (solo si está presente)
+          if (form.actual) {
+            const precioActual = Number(form.actual);
+            if (isNaN(precioActual)) {
+              errs.push(`${panelPrefix}El precio actual debe ser un número válido`);
+            } else if (precioActual < (validationConfig.minPrice ?? 0)) {
+              errs.push(`${panelPrefix}El precio actual debe ser mayor o igual a ${validationConfig.minPrice ?? 0}`);
+            } else if (precioActual > (validationConfig.maxPrice ?? 999999)) {
+              errs.push(`${panelPrefix}El precio actual debe ser menor o igual a ${validationConfig.maxPrice ?? 999999}`);
+            }
+          }
+
+          // Validar código (solo si está presente)
+          if (form.codigo && form.codigo.length > 20) {
+            errs.push(`${panelPrefix}El código debe tener máximo 20 caracteres`);
+          }
+
+          // Validar precio anterior (si se proporciona)
+          if (form.anterior) {
+            const precioAnterior = Number(form.anterior);
+            if (isNaN(precioAnterior) || precioAnterior < (validationConfig.minPrice ?? 0)) {
+              errs.push(`${panelPrefix}El precio anterior debe ser mayor o igual a ${validationConfig.minPrice ?? 0}`);
+            }
+          }
+
+          // Validar promoción (si se proporciona)
+          if (form.promo && (isNaN(Number(form.promo)) || Number(form.promo) <= 0)) {
+            errs.push(`${panelPrefix}La promoción debe ser un número mayor a 0`);
+          }
+
+          // Validar que el precio anterior sea mayor al actual si ambos están presentes
+          if (form.anterior && form.actual && Number(form.anterior) <= Number(form.actual)) {
+            errs.push(`${panelPrefix}El precio anterior debe ser mayor al precio actual`);
+          }
+        }
+      });
+    } else {
+      // Modo normal: validar el formulario único
+      const form = forms[0];
+
+      // Validar producto según requireProduct
+      if (validationConfig.requireProduct && !form.producto) {
+        errs.push('El nombre del producto es requerido');
+      } else if (form.producto && form.producto.length > (validationConfig.maxProductLength ?? 50)) {
+        errs.push(`El nombre del producto debe tener máximo ${validationConfig.maxProductLength ?? 50} caracteres`);
+      }
+
+      // Validar precio actual según requireCurrentPrice
+      if (validationConfig.requireCurrentPrice && !form.actual) {
+        errs.push('El precio actual es requerido');
+      } else if (form.actual) {
+        const precioActual = Number(form.actual);
+        if (isNaN(precioActual)) {
+          errs.push('El precio actual debe ser un número válido');
+        } else if (precioActual < (validationConfig.minPrice ?? 0)) {
+          errs.push(`El precio actual debe ser mayor o igual a ${validationConfig.minPrice ?? 0}`);
+        } else if (precioActual > (validationConfig.maxPrice ?? 999999)) {
+          errs.push(`El precio actual debe ser menor o igual a ${validationConfig.maxPrice ?? 999999}`);
+        }
+      }
+
+      // Validar código según requireCode
+      if (validationConfig.requireCode && !form.codigo) {
+        errs.push('El código del producto es requerido');
+      } else if (form.codigo && form.codigo.length > 20) {
+        errs.push('El código debe tener máximo 20 caracteres');
+      }
+
+      // Validar precio anterior (si se proporciona)
+      if (form.anterior) {
+        const precioAnterior = Number(form.anterior);
+        if (isNaN(precioAnterior) || precioAnterior < (validationConfig.minPrice ?? 0)) {
+          errs.push(`El precio anterior debe ser mayor o igual a ${validationConfig.minPrice ?? 0}`);
+        }
+      }
+
+      // Validar promoción (si se proporciona)
+      if (form.promo && (isNaN(Number(form.promo)) || Number(form.promo) <= 0)) {
+        errs.push('La promoción debe ser un número mayor a 0');
+      }
+
+      // Validar que el precio anterior sea mayor al actual si ambos están presentes
+      if (form.anterior && form.actual && Number(form.anterior) <= Number(form.actual)) {
+        errs.push('El precio anterior debe ser mayor al precio actual');
       }
     }
-    
-    // Validar código según requireCode
-    if (validationConfig.requireCode && !form.codigo) {
-      errs.push('El código del producto es requerido');
-    } else if (form.codigo && form.codigo.length > 20) {
-      errs.push('El código debe tener máximo 20 caracteres');
-    }
-    
-    // Validar precio anterior (si se proporciona)
-    if (form.anterior) {
-      const precioAnterior = Number(form.anterior);
-      if (isNaN(precioAnterior) || precioAnterior < (validationConfig.minPrice ?? 0)) {
-        errs.push('El precio anterior debe ser mayor o igual a ' + (validationConfig.minPrice ?? 0));
-      }
-    }
-    
-    // Validar promoción (si se proporciona)
-    if (form.promo && (isNaN(Number(form.promo)) || Number(form.promo) <= 0)) {
-      errs.push('La promoción debe ser un número mayor a 0');
-    }
-    
-    // Validar que el precio anterior sea mayor al actual si ambos están presentes
-    if (form.anterior && form.actual && Number(form.anterior) <= Number(form.actual)) {
-      errs.push('El precio anterior debe ser mayor al precio actual');
-    }
-    
+
     return errs;
   };
 
@@ -303,10 +488,11 @@ function App() {
       return;
     }
     try {
+      const combinedData = getCombinedFormData();
       const format = exportConfig?.imageFormat || "png";
       const mimeType = format === "jpg" ? "image/jpeg" : `image/${format}`;
       const prefix = exportConfig?.individualPrefix || "rotulo_";
-      const filename = `${prefix}${form.producto || "sin_nombre"}.${format}`;
+      const filename = `${prefix}${combinedData.producto || "sin_nombre"}.${format}`;
       const blob = await exportRotulo(rotulo, realSize.width, realSize.height, filename, mimeType, true, true);
       if (blob) {
         saveAs(blob, filename);
@@ -324,14 +510,12 @@ function App() {
       showNotification("error", errs[0]);
       return;
     }
-    if (!form.producto || !form.actual) {
-      showNotification("error", "El producto y el precio actual son obligatorios");
-      return;
-    }
+
+    const combinedData = getCombinedFormData();
     setQueue((prev) => [
       ...prev,
       {
-        ...form,
+        ...combinedData,
         id: Date.now().toString() + Math.random().toString(36).slice(2)
       }
     ]);
@@ -357,8 +541,13 @@ function App() {
   };
 
   const handleEditChange = (e) => {
-    const { name, value } = e.target;
-    setEditData((prev) => ({ ...prev, [name]: value }));
+    if (e.target.name === 'combined') {
+      // Manejar actualización completa para 4 paneles
+      setEditData(e.target.value);
+    } else {
+      const { name, value } = e.target;
+      setEditData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleEditUnitChange = (e) => {
@@ -428,7 +617,26 @@ function App() {
       });
       if (!size.width || !size.height) continue;
       // Renderizar el rótulo temporalmente con los datos del item
-      setForm(item);
+      // Para 4 paneles, necesitamos descomponer los datos combinados de vuelta a array
+      if (item.fondo && labels.backgrounds.find(bg => bg.id === item.fondo)?.es4Paneles) {
+        // Si es 4 paneles, descomponer los datos
+        const productos = item.producto ? item.producto.split(' | ') : ['', '', '', ''];
+        const actuales = item.actual ? item.actual.split(' | ') : ['', '', '', ''];
+        const anteriores = item.anterior ? item.anterior.split(' | ') : ['', '', '', ''];
+        const promos = item.promo ? item.promo.split(' | ') : ['', '', '', ''];
+        const codigos = item.codigo ? item.codigo.split(' | ') : ['', '', '', ''];
+        const unidades = item.unidad ? item.unidad.split(' | ') : ['', '', '', ''];
+
+        setForms([
+          { ...item, producto: productos[0] || '', actual: actuales[0] || '', anterior: anteriores[0] || '', promo: promos[0] || '', codigo: codigos[0] || '', unidad: unidades[0] || '' },
+          { ...item, producto: productos[1] || '', actual: actuales[1] || '', anterior: anteriores[1] || '', promo: promos[1] || '', codigo: codigos[1] || '', unidad: unidades[1] || '' },
+          { ...item, producto: productos[2] || '', actual: actuales[2] || '', anterior: anteriores[2] || '', promo: promos[2] || '', codigo: codigos[2] || '', unidad: unidades[2] || '' },
+          { ...item, producto: productos[3] || '', actual: actuales[3] || '', anterior: anteriores[3] || '', promo: promos[3] || '', codigo: codigos[3] || '', unidad: unidades[3] || '' }
+        ]);
+      } else {
+        // Si no es 4 paneles, usar el primer formulario
+        setForms(prev => prev.map((form, index) => index === 0 ? item : form));
+      }
       await new Promise(resolve => setTimeout(resolve, 100)); // Esperar a que el DOM se actualice
       const rotuloTemp = document.getElementById("rotulo");
       const format = exportConfig?.imageFormat || "png";
@@ -474,11 +682,12 @@ function App() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [form, labels, autocomplete]);
+  }, [forms, labels, autocomplete]);
 
   // Cargar fondo dinámicamente como en la app original
   useEffect(() => {
-    const fondoConfig = labels.backgrounds.find(bg => bg.id === form.fondo);
+    const combinedData = getCombinedFormData();
+    const fondoConfig = labels.backgrounds.find(bg => bg.id === combinedData.fondo);
     if (fondoConfig) {
       let link = document.getElementById('estiloFondo');
       if (!link) {
@@ -490,10 +699,11 @@ function App() {
       link.href = `/${fondoConfig.cssFile.replace('css/', '')}`;
     }
     // Limpieza opcional: no removemos el link para mantener el fondo
-  }, [form.fondo, labels.backgrounds]);
+  }, [forms, labels.backgrounds]);
 
   // Obtener el archivo de imagen de fondo actual
-  const fondoConfig = labels.backgrounds.find(bg => bg.id === form.fondo);
+  const combinedData = getCombinedFormData();
+  const fondoConfig = labels.backgrounds.find(bg => bg.id === combinedData.fondo);
   const fondoImageFile = fondoConfig ? `${fondoConfig.id}.png` : null;
   const realSize = useImageSize(fondoImageFile);
   const previewRef = useRef();
@@ -501,27 +711,74 @@ function App() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Header onHelp={handleHelp} onToggleTheme={handleToggleTheme} />
-      <ProductForm
-        values={form}
+      <Accordion
+        forms={forms}
         units={labels.units}
         backgrounds={labels.backgrounds}
-        onChange={handleChange}
+        onFormChange={handleFormChange}
         onUnitChange={handleUnitChange}
         onBackgroundChange={handleBackgroundChange}
         onDownload={handleDownload}
         onAddToQueue={handleAddToQueue}
         errors={errors}
+        is4Paneles={is4Paneles()}
+        onSingleChange={handleSingleChange}
+        onSingleUnitChange={handleSingleUnitChange}
       />
+
+      {is4Paneles() && (
+        <div className="controles-4paneles">
+          <div className="campo-fondo">
+            <span className="etiqueta-fondo">Diseño de fondo:</span>
+            <select
+              id="selectorFondo"
+              className="selector-fondo"
+              value={forms[0].fondo}
+              onChange={handleBackgroundChange}
+              aria-label="Diseño de fondo"
+            >
+              {labels.backgrounds.map(bg => (
+                <option key={bg.id} value={bg.id}>{bg.name}</option>
+              ))}
+            </select>
+          </div>
+          <div className="botones-formulario">
+            <button
+              id="botonDescargarRotulo"
+              className="botonDescargarRotulo ripple"
+              type="button"
+              onClick={handleDownload}
+              aria-label="Descargar imagen del rótulo"
+            >
+              Descargar imagen
+            </button>
+            <button
+              id="botonAgregarCola"
+              className="botonAgregarCola ripple"
+              type="button"
+              onClick={handleAddToQueue}
+              aria-label="Agregar rótulo a la cola"
+            >
+              Agregar a la cola
+            </button>
+          </div>
+        </div>
+      )}
       <div className="contenedor-previsualizacion" ref={previewRef}>
-        <LabelPreview
-          producto={form.producto}
-          actual={form.actual}
-          anterior={form.anterior}
-          promo={form.promo}
-          unidad={form.unidad}
-          fondo={form.fondo}
-          codigo={form.codigo}
-        />
+        {(() => {
+          const combinedData = getCombinedFormData();
+          return (
+            <LabelPreview
+              producto={combinedData.producto}
+              actual={combinedData.actual}
+              anterior={combinedData.anterior}
+              promo={combinedData.promo}
+              unidad={combinedData.unidad}
+              fondo={combinedData.fondo}
+              codigo={combinedData.codigo}
+            />
+          );
+        })()}
       </div>
       {processing && (
         <div className="processing-overlay">

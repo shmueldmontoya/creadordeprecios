@@ -1,6 +1,6 @@
 # 🏷️ Generador de Rótulos - React
 
-Una aplicación web moderna y personalizable para generar rótulos de precios para tiendas, supermercados y negocios, completamente configurable. **Desarrollada con React y Vite** para mejor rendimiento y mantenibilidad.
+Una aplicación web personalizable para generar rótulos de precios para tiendas, supermercados y negocios, completamente configurable. **Desarrollada con React y Vite**
 
 > **Nota:** Esta versión utiliza imágenes reales (archivos PNG/JPG) para los fondos, a diferencia de la versión JS Vanilla que usaba cadenas de texto base64 por restricciones de CORS del navegador.
 
@@ -13,9 +13,8 @@ Una aplicación web moderna y personalizable para generar rótulos de precios pa
 
 ## ✨ Características
 
-- ⚛️ **React 19+**: Arquitectura moderna y mantenible
-- 🚀 **Vite**: Desarrollo ultrarrápido y build optimizado
 - 🎨 **Diseños Personalizables**: Múltiples plantillas de fondo configurables
+- 🏗️ **Fondos de 4 Paneles**: Soporte para rótulos con 4 secciones independientes
 - 📱 **Responsive Design**: Funciona perfectamente en desktop, tablet y móvil
 - 🌙 **Modo Oscuro**: Interfaz adaptable con tema claro/oscuro
 - ⚡ **Previsualización en Tiempo Real**: Ve los cambios instantáneamente
@@ -90,6 +89,32 @@ Para agregar un fondo personalizado:
    - Ve el resultado en tiempo real
    - Descarga la imagen individual
    - O agrega a la cola para procesar en lote
+
+## 🏗️ Fondos de 4 Paneles
+
+La aplicación incluye soporte especial para fondos de 4 paneles, ideales para rótulos con múltiples productos o secciones.
+
+### Cómo Funciona
+
+- **Detección Automática**: Al seleccionar un fondo configurado como "4 paneles", la interfaz cambia automáticamente.
+- **Acordeón Interactivo**: Se muestra un acordeón con 4 paneles plegables, cada uno con su propio formulario.
+- **Previsualización Unificada**: Todos los datos se combinan en una sola imagen de rótulo.
+- **Validación Independiente**: Cada panel se valida por separado, pero todos deben tener al menos un producto válido.
+
+### Configuración
+
+Para agregar fondos de 4 paneles:
+1. Crea la imagen de fondo con 4 secciones distintas
+2. Configura el CSS para posicionar cada set de datos en su panel correspondiente
+3. Agrega el fondo en `AppConfigContext.jsx` con `es4Paneles: true`
+
+### Ejemplo de Uso
+
+1. Selecciona "4 Paneles Martes" del selector de fondos
+2. Se expande automáticamente el acordeón con 4 paneles
+3. Llena los datos de cada panel (Panel 1, Panel 2, Panel 3, Panel 4)
+4. La previsualización muestra todos los datos en la imagen de 4 paneles
+5. Descarga la imagen completa con todos los productos
 
 ## ⌨️ Atajos de Teclado
 
@@ -197,6 +222,13 @@ Si tienes problemas o preguntas:
 3. Asegúrate de que todas las dependencias estén instaladas
 
 ## 🔄 Changelog
+
+### v3.1.0 - Fondos de 4 Paneles
+- 🏗️ **Soporte para fondos de 4 paneles**: Nueva funcionalidad para rótulos con múltiples secciones
+- 🎛️ **Acordeón interactivo**: Interfaz plegable para introducir datos de 4 paneles
+- 🔄 **Transición automática**: Cambio dinámico entre modos de 1 y 4 paneles
+- ♿ **Accesibilidad mejorada**: Atributos ARIA completos en el acordeón
+- 📝 **Validación múltiple**: Sistema de validación independiente por panel
 
 ### v3.0.0 - React + Vite
 - ⚛️ **Migración completa** a React 19+ con Vite

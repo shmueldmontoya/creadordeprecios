@@ -11,7 +11,10 @@ const ProductForm = ({
   onAddToQueue,
   errors,
   autocompleteOptions,
-  onAutocompleteSelect
+  onAutocompleteSelect,
+  panelIndex,
+  hideBackgroundSelector = false,
+  hideButtons = false
 }) => {
   const inputRef = useRef();
 
@@ -137,40 +140,44 @@ const ProductForm = ({
           </label>
         ))}
       </div>
-      <div className="campo-fondo">
-        <span className="etiqueta-fondo">Diseño de fondo:</span>
-        <select
-          id="selectorFondo"
-          className="selector-fondo"
-          value={values.fondo}
-          onChange={onBackgroundChange}
-          aria-label="Diseño de fondo"
-        >
-          {backgrounds.map(bg => (
-            <option key={bg.id} value={bg.id}>{bg.name}</option>
-          ))}
-        </select>
-      </div>
-      <div className="botones-formulario">
-        <button
-          id="botonDescargarRotulo"
-          className="botonDescargarRotulo ripple"
-          type="button"
-          onClick={onDownload}
-          aria-label="Descargar imagen del rótulo"
-        >
-          Descargar imagen
-        </button>
-        <button
-          id="botonAgregarCola"
-          className="botonAgregarCola ripple"
-          type="button"
-          onClick={onAddToQueue}
-          aria-label="Agregar rótulo a la cola"
-        >
-          Agregar a la cola
-        </button>
-      </div>
+      {!hideBackgroundSelector && (
+        <div className="campo-fondo">
+          <span className="etiqueta-fondo">Diseño de fondo:</span>
+          <select
+            id="selectorFondo"
+            className="selector-fondo"
+            value={values.fondo}
+            onChange={onBackgroundChange}
+            aria-label="Diseño de fondo"
+          >
+            {backgrounds.map(bg => (
+              <option key={bg.id} value={bg.id}>{bg.name}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {!hideButtons && (
+        <div className="botones-formulario">
+          <button
+            id="botonDescargarRotulo"
+            className="botonDescargarRotulo ripple"
+            type="button"
+            onClick={onDownload}
+            aria-label="Descargar imagen del rótulo"
+          >
+            Descargar imagen
+          </button>
+          <button
+            id="botonAgregarCola"
+            className="botonAgregarCola ripple"
+            type="button"
+            onClick={onAddToQueue}
+            aria-label="Agregar rótulo a la cola"
+          >
+            Agregar a la cola
+          </button>
+        </div>
+      )}
     </form>
   );
 };
